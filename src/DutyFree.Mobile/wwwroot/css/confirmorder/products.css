@@ -1,0 +1,31 @@
+﻿.check {
+    padding-top: 15px;
+    color: #ffffff;
+    min-height: 50px;
+    background-color: #663399;
+}
+
+.total {
+    padding-top: 15px;
+    min-height: 50px;
+}
+
+.check a {
+    color: white;
+}
+
+.header {
+    padding-top: 5px;
+}
+
+.product-summary {
+    margin-top: 30px;
+}
+
+.address {
+    margin-top: 20px;
+}
+
+.bottom {
+    margin-top: 0px;
+}

@@ -1,0 +1,39 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Entity.Product
+@using DutyFree.Platform.Constant
+@using DutyFree.Service.Product
+@using DutyFree.Platform.Util
+@using DutyFree.Platform.Extension
+@using DutyFree.Entity.ValueType
+
+@model KeyValuePair<string, string>
+
+@{
+    var productService = this.GetService<ProductService>();
+    var reviewService = this.GetService<ReviewService>();
+
+    var product = productService.Get(Model.Key);
+
+    var comments = reviewService.GetComment(Model.Key, long.Parse(Model.Value));
+    var comment = comments.IsEmpty() ? new Comment() : comments.First();
+}
+
+<div class="well">
+    <div class="row">
+        <div class="col-xs-3">
+            <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+        </div>
+        <div class="col-xs-9">
+            <a href="~/Detail?productId=@product.Id">@Html.Raw(StringUtil.StripHtml(product.Name))</a>
+        </div>
+    </div>
+
+    <div class="row margin-top">
+        <div class="col-xs-6">
+            @Html.Partial("~/Views/Shared/Star/Star", (int)comment.Star)
+        </div>
+        <div class="col-xs-6">
+            <span class="pull-right text-danger"><b>@Html.Raw(comment.Content)</b></span>
+        </div>
+    </div>
+</div>

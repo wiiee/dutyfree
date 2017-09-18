@@ -1,0 +1,55 @@
+﻿@*@using DutyFree.WebCore.Extension;
+@using DutyFree.Service.Product
+@using DutyFree.Service.Standard
+
+@{
+    var brandIds = this.GetService<ProductService>().Get(o => o.CategoryId == "Digit").Select(o => o.BrandId).Distinct().ToList();
+    var brands = this.GetService<BrandService>().GetByIds(brandIds);
+}
+
+<h3>品牌</h3>
+<div class="row">
+    @foreach (var item in brands)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.UrlEncode(item.Id)&categoryId=Bag">
+                    <img src="~/images/brand/@Html.Raw(item.Id+ ".jpg")" class="img-thumbnail" />
+                    <div class="pic-text">@Html.Raw(item.Name.Get("zh-CN"))</div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="margin-top"></div>*@
+
+<h3>品牌</h3>
+<div class="row">
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=BEATS%20BY%20DR.%20DRE&categoryId=Bag">
+                <img src="/images/brand/BEATS BY DR. DRE.jpg" class="img-thumbnail" />
+                <div class="pic-text">BEATS BY DR. DRE</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SAMSUNG&categoryId=Bag">
+                <img src="/images/brand/SAMSUNG.jpg" class="img-thumbnail" />
+                <div class="pic-text">三星</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SENNHEISER&categoryId=Bag">
+                <img src="/images/brand/SENNHEISER.jpg" class="img-thumbnail" />
+                <div class="pic-text">森海塞尔</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="margin-top"></div>

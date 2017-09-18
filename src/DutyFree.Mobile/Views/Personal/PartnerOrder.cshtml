@@ -1,0 +1,48 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Order
+@using DutyFree.Entity.Order
+@using DutyFree.Platform.Extension
+@using DutyFree.Platform.Enum
+
+@{
+    var partnerOrders = ViewData["PartnerOrders"] as List<PartnerOrder>;
+    var type = (int)ViewData["Type"];
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/personal/partnerorder.css" asp-append-version="true" />
+}
+
+@section scripts {
+    @*<script type="text/javascript" src="~/js/personal/index.js" asp-append-version="true"></script>*@
+}
+
+<div class="margin-top"></div>
+
+@if (partnerOrders.IsEmpty())
+{
+    @Html.Partial("Empty")
+}
+else
+{
+    @foreach (var item in partnerOrders)
+    {
+        @Html.Partial("Order/Partner/Item", item)
+        @*@if (type == 0)
+        {
+            @Html.Partial("PartnerOrder/Pending", item)
+        }
+        else if (type == 1)
+        {
+            @Html.Partial("PartnerOrder/Ongoing", item)
+        }
+        else if (type == 2)
+        {
+            @Html.Partial("PartnerOrder/Done", item)
+        }*@
+        <hr />
+    }
+}
+
+

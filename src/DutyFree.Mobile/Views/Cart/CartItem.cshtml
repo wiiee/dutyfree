@@ -1,0 +1,28 @@
+﻿@using DutyFree.Platform.Constant
+
+<div class="col-xs-1">
+    <div class="checkbox single-checkbox">
+        <input type="checkbox" ng-click="selectProduct(key)" ng-model="productIds[key]" >
+    </div>
+</div>
+<div class="col-xs-4">
+    <a ng-href="/Detail?productId={{key | escape}}"><img class="img-thumbnail" ng-src="{{getImgUrl(key)}}" alt="Logo"></a>
+</div>
+<div class="col-xs-7 cart-item">
+    <div>
+        <a ng-href="/Detail?productId={{key | escape}}" ng-bind-html="products[key].Name"></a>
+    </div>
+    <div class="row price-line">
+        <div class="col-xs-3 price">@Html.Raw(UiSymbol.RMB){{products[key].Price}}</div>
+        <div class="col-xs-7">
+            <div class="input-group">
+                <span class="input-group-addon" ng-click="minusCount(key, value.Quantity)" ng-class="{idle:value.Quantity === 1}">-</span>
+                <input class="form-control text-center" ng-model="value.Quantity">
+                <span class="input-group-addon" ng-click="plusCount(key)">+</span>
+            </div>
+        </div>
+        <div class="col-xs-2 text-center delete">
+            <span class="glyphicon glyphicon-remove" ng-click="removeCart(key)"></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.WebCore.Constant
+@using DutyFree.Service.User
+@using DutyFree.Platform.Enum
+@using DutyFree.Platform.Extension
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "个人中心";
+    ViewData["ng-app"] = "personal";
+    var user = this.GetService<UserService>().Get(this.GetUserId());
+    var preference = this.GetService<PreferenceService>().Get(this.GetUserId());
+    var money = preference != null && preference.Wallet != null ? preference.Wallet.GetTotal() : 0;
+    var msgNumbers = preference != null && !preference.Messages.IsEmpty() ? preference.Messages.Count : 0;
+
+    var userType = (UserType)Context.Session.GetInt32(SessionKey.USER_TYPE);
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/personal/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/js/personal/index.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top" ng-controller="personalCtrl"></div>
+
+<div class="row">
+    <div class="col-xs-8">
+        <h4>你好, @user.Id</h4>
+    </div>
+</div>
+
+<div class="row margin-top">
+    <div class="col-xs-6">
+        <a href="~/Personal/Wallet">我的钱包<span class="badge">@money</span></a>
+    </div>
+    <div class="col-xs-6">
+        <div class="pull-right">
+            <a href="~/Personal/Message">我的消息<span class="badge">@msgNumbers</span></a>
+        </div>
+    </div>
+</div>
+<hr />
+
+@if (userType == UserType.Partner)
+{
+    <h4>我的订单</h4>
+    @Html.Partial("Order/Partner/Sell")
+    <hr />
+}
+else if (userType == UserType.User)
+{
+    <h4>我的订单</h4>
+    @Html.Partial("Order/User/Buy")
+    <hr />
+}
+
+@if (userType == UserType.User)
+{
+    <h4>我的评价</h4>
+    @Html.Partial("Review/User/User")
+    <hr />
+}
+
+<div class="row" id="logOff">
+    <div class="col-xs-12">
+        <a class="btn btn-default form-control log-off" href="~/Account/LogOff">退出登录</a>
+    </div>
+</div>

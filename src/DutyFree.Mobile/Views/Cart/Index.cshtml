@@ -1,0 +1,38 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Extension
+
+@{
+    ViewData["Title"] = "购物车";
+    ViewData["ng-app"] = "myCart";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/cart/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/bootbox/bootbox.js"></script>
+    <script type="text/javascript" src="~/js/cart/index.js" asp-append-version="true"></script>
+}
+
+<div ng-controller="cartCtrl" ng-show="isReady" ng-cloak>
+    <div class="row margin-top" ng-repeat="(key, value) in preference.Carts">
+        @Html.Partial("~/Views/Cart/CartItem.cshtml")
+    </div>
+
+    <div class="bottom"></div>
+
+    <div class="row" id="confirmOrder">
+        <div class="col-xs-3">
+            <div class="checkbox all-checkbox">
+                <input type="checkbox" ng-model="isSelectAll" ng-click="selectAll()">全选
+            </div>
+        </div>
+        <div class="col-xs-5 total-price text-center"><b>合计:{{totalPrice | currency:"@Html.Raw(this.GetCurrencySymbol())":2}}</b></div>
+        <div class="col-xs-4 text-center check">
+            <a href="javascript:void(0)" ng-click="confirmOrder()">去结算({{orderQuantity}})</a>
+            <div class="tooltip top in" ng-if="orderQuantity === 0"><div class="tooltip-inner">你还没有选择商品！</div></div>
+        </div>
+    </div>
+</div>

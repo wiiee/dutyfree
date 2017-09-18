@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Category";
+    ViewData["ng-app"] = "category";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/lib/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="~/js/setting/category.js"></script>
+    <script type="text/javascript">
+    </script>
+}
+
+@section breadcrumb{
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Setting</a></li>
+            <li class="active">Category</li>
+        </ol>
+    </div>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>Category</h1>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/HeaderMessage.cshtml")
+
+<div class="row" ng-controller="categoryCtrl" ng-cloak>
+    <form method="post" ng-submit="submit()">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Categories <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ng-click="addItem()"></span></h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-2">Id</div>
+                                    <div class="col-md-3">Parent</div>
+                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-3">Properties</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in items">
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <input class="form-control" ng-model="item.Id" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control" ng-model="item.ParentId">
+                                            <option value="">None</option>
+                                            <option ng-repeat="categoryId in getCategoryIds(item.Id)" value="{{categoryId}}">{{categoryId}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" ng-model="item.Description" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control propertyIds" ng-model="item.PropertyIds" multiple="multiple" data-validation="required">
+                                            <option ng-repeat="propertyId in properties" value="{{propertyId.Id}}">{{propertyId.Id}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="glyphicon glyphicon-remove" ng-if="items.length > 0" ng-click="removeItem(item.Index)"></span>
+                                    </div>
+                                </div>
+                                <div class="row top-margin">
+                                    <div class="col-md-1" ng-repeat="propertyId in item.PropertyIds">
+                                        <input type="checkbox" ng-model="item.Properties[propertyId]" />{{propertyId}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="reset" class="btn btn-default left-margin" ng-click="reset($event)">Reset</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

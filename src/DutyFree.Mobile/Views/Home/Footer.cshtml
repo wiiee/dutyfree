@@ -1,0 +1,11 @@
+﻿@if (ViewData["Title"] as string == "Download")
+{
+}
+else if (ViewData["IsPartner"] == null)
+{
+    @Html.Partial("~/Views/Shared/Footer.cshtml")
+}
+else
+{
+    @Html.Partial("~/Views/Shared/Provider/Footer.cshtml")
+}

@@ -1,0 +1,78 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.Product
+@using DutyFree.Platform.Enum
+@using DutyFree.Platform.Util
+@using DutyFree.Service.Order
+
+@{
+    ViewData["Title"] = "首页";
+    ViewData["ng-app"] = "home";
+    ViewData["IsPartner"] = true;
+    var isTrustUser = (bool)ViewData["IsTrustUser"];
+    var partnerOrders = this.GetService<PartnerOrderService>().Get();
+    var productService = this.GetService<ProductService>();
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/home/provider.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _isTrustUser = @(isTrustUser ? "true" : "false");
+    </script>
+    <script type="text/javascript" src="~/lib/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"></script>
+    <script type="text/javascript" src="~/js/home/provider.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top" ng-controller="providerCtrl" ng-cloak>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="alert alert-success" role="alert">@Html.Raw("当前页面有" + ViewData["Numbers"] + "个人正在浏览!")</div>
+        </div>
+    </div>
+
+    @if (!isTrustUser)
+    {
+        <form>
+            <div class="row" ng-show="!isEmpty">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label>机场</label>
+                        <select type="text" id="airport" class="form-control" ng-model="airport" ng-options="item.Name for item in airports" ng-change="changeAirport()" 
+                                data-validation="custom" data-validation-regexp="^([^\?].+)$" data-validation-error-msg="请选择机场"></select>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label>航班号</label>
+                        <select type="text" id="flightNo" class="form-control" ng-model="flightNo" ng-options="item for item in flightNos" ng-change="changeFlightNo()"
+                                data-validation="custom" data-validation-regexp="^([^\?].+)$" data-validation-error-msg="请选择航班号"></select>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 helper-text">
+                    <span class="text-danger pull-right">请准确填写机场和航班号，方便我们的工作人员准时接机!</span>
+                </div>
+            </div>
+        </form>
+    }
+
+    <div class="row margin-top"></div>
+
+    <div class="row" ng-if="isError">
+        <div class="col-xs-12 text-center">
+            <div class="alert alert-danger" role="alert">{{errorMsg}}</div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isEmpty">
+        <div class="col-xs-12 text-center">
+            <div class="alert alert-warning" role="alert">当前没有订单</div>
+        </div>
+    </div>
+
+    <div id="items">
+        @Html.Partial("PartnerItems")
+    </div>
+</div>

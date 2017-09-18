@@ -1,0 +1,84 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Order
+
+@inject PreferenceService preferenceService
+
+@{ 
+    var app = ViewData["ng-app"];
+
+    if(app == null)
+    {
+        app = "default";
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DutyFree.Mobile</title>
+
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/shared/common.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    @*<environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>*@
+    @RenderSection("css", required: false)
+</head>
+<body ng-app="@app" ng-cloak>
+    @Html.Partial("Header")
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+    </div>
+
+    <div class="bottom"></div>
+
+    @Html.Partial("Footer")
+
+    <environment names="Development,Staging,Production">
+        <script type="text/javascript">
+            var _basePath = "@Context.Request.PathBase";
+            var _host = "@Context.Request.Host";
+            var _userId = "@Html.Raw(this.GetUserId())";
+            var _cartQuantity = @Html.Raw(preferenceService.GetCartCount(this.GetUserId()));
+            var _partnerOrderQuantity = 0;
+        </script>
+
+        <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="~/lib/underscore/underscore.js"></script>
+        <script type="text/javascript" src="~/js/shared/utility.js"></script>
+        <script type="text/javascript" src="~/lib/angular/angular.min.js"></script>
+        <script type="text/javascript" src="~/lib/angular/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="~/js/shared/filters.js" asp-append-version="true"></script>
+
+        <script type="text/javascript">
+                var app = angular.module("@app", ['myFilters']);
+        </script>
+
+        <script src="~/js/shared/footer.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    @*<environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>*@
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

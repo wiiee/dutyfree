@@ -1,0 +1,106 @@
+﻿@using DutyFree.Platform.Enum
+
+@{
+    ViewBag.Title = "Property";
+    ViewData["ng-app"] = "property";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/setting/property.css" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+
+    <script type="text/javascript">
+        var _unitValueTypes = @Html.Raw(Json.Serialize(Enum.GetNames(typeof(UnitValueType))));
+    </script>
+    <script type="text/javascript" src="~/js/setting/property.js"></script>
+}
+
+@section breadcrumb{
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Setting</a></li>
+            <li class="active">Property</li>
+        </ol>
+    </div>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>Property</h1>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/HeaderMessage.cshtml")
+
+<div class="row" ng-controller="propertyCtrl" ng-cloak>
+    <form method="post" ng-submit="submit()">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Properties <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ng-click="addItem()"></span></h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-4">Id</div>
+                                    <div class="col-md-4">Description</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in items">
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input class="form-control" ng-model="item.Id" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" ng-model="item.Description" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="glyphicon glyphicon-plus" ng-click="addUnit(item)"></span>
+                                    </div>
+                                </div>
+                                <div class="row top-margin" ng-repeat="unit in item.Units">
+                                    <div class="col-md-2 col-md-offset-3">
+                                        <select class="form-control" ng-model="unit.Key" data-validation="required"
+                                                ng-options="unit.Id as unit.Id for unit in units"></select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-control unitValueType" ng-model="unit.Value.Type" data-validation="required"
+                                                ng-options="unitValueTypes.indexOf(selectedItem) as selectedItem for selectedItem in unitValueTypes"></select>
+                                        <span class="glyphicon glyphicon-plus" ng-click="addValue(unit)" ng-if="unit.Value.Type === 1"></span>
+                                    </div>
+                                    <div class="col-md-2" ng-if="unit.Value.Type === 0"><input class="form-control" ng-model="unit.Value.Min" data-validation="number" /></div>
+                                    <div class="col-md-2" ng-if="unit.Value.Type === 0"><input class="form-control" ng-model="unit.Value.Max" data-validation="number" /></div>
+                                    <div class="col-md-4" ng-if="unit.Value.Type === 1">
+                                        <div class="row">
+                                            <div class="col-md-3" ng-repeat="value in unit.Value.Values track by $index"><input class="form-control" ng-model="unit.Value.Values[$index]" data-validation="required" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="glyphicon glyphicon-remove" ng-if="items.length > 0" ng-click="removeUnit(item, unit.Index)"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="reset" class="btn btn-default left-margin" ng-click="reset($event)">Reset</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

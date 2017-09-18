@@ -1,0 +1,154 @@
+﻿@*@using DutyFree.WebCore.Extension;
+@using DutyFree.Service.Product
+@using DutyFree.Service.Standard
+
+@{
+    var brandIds = this.GetService<ProductService>().Get(o => o.CategoryId == "Health").Select(o => o.BrandId).Distinct().ToList();
+    var brands = this.GetService<BrandService>().GetByIds(brandIds);
+}
+
+<h3>品牌</h3>
+<div class="row">
+    @foreach (var item in brands)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.UrlEncode(item.Id)&categoryId=Bag">
+                    <img src="~/images/brand/@Html.Raw(item.Id+ ".jpg")" class="img-thumbnail" />
+                    <div class="pic-text">@Html.Raw(item.Name.Get("zh-CN"))</div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="margin-top"></div>*@
+
+
+
+
+<h3>品牌</h3>
+<div class="row">
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=A2&categoryId=Bag">
+                <img src="/images/brand/A2.jpg" class="img-thumbnail" />
+                <div class="pic-text">A2</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=BLACKMORES&categoryId=Bag">
+                <img src="/images/brand/BLACKMORES.jpg" class="img-thumbnail" />
+                <div class="pic-text">澳佳宝</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=DOPPELHERZ&categoryId=Bag">
+                <img src="/images/brand/DOPPELHERZ.jpg" class="img-thumbnail" />
+                <div class="pic-text">双心</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=FATBLASTER&categoryId=Bag">
+                <img src="/images/brand/FATBLASTER.jpg" class="img-thumbnail" />
+                <div class="pic-text">菲拉思德</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=GNC&categoryId=Bag">
+                <img src="/images/brand/GNC.jpg" class="img-thumbnail" />
+                <div class="pic-text">健安喜</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=HEALTHY%20CARE&categoryId=Bag">
+                <img src="/images/brand/HEALTHY CARE.jpg" class="img-thumbnail" />
+                <div class="pic-text">HEALTHY CARE</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=KARICARE&categoryId=Bag">
+                <img src="/images/brand/KARICARE.jpg" class="img-thumbnail" />
+                <div class="pic-text">可瑞康</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=KGC&categoryId=Bag">
+                <img src="/images/brand/KGC.jpg" class="img-thumbnail" />
+                <div class="pic-text">正官庄</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=KOBAYASHI&categoryId=Bag">
+                <img src="/images/brand/KOBAYASHI.jpg" class="img-thumbnail" />
+                <div class="pic-text">小林制药</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MEADJOHNSON&categoryId=Bag">
+                <img src="/images/brand/MEADJOHNSON.jpg" class="img-thumbnail" />
+                <div class="pic-text">美赞臣</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=NATURE%20MADE&categoryId=Bag">
+                <img src="/images/brand/NATURE MADE.jpg" class="img-thumbnail" />
+                <div class="pic-text">莱萃美</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=OSULLOC&categoryId=Bag">
+                <img src="/images/brand/OSULLOC.jpg" class="img-thumbnail" />
+                <div class="pic-text">OSULLOC</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SWISSE&categoryId=Bag">
+                <img src="/images/brand/SWISSE.jpg" class="img-thumbnail" />
+                <div class="pic-text">SWISSE</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=WYETH&categoryId=Bag">
+                <img src="/images/brand/WYETH.jpg" class="img-thumbnail" />
+                <div class="pic-text">惠氏</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=%E7%BE%8E%E5%A5%BD%E4%BA%BA%E7%94%9F&categoryId=Bag">
+                <img src="/images/brand/美好人生.jpg" class="img-thumbnail" />
+                <div class="pic-text">美好人生</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="margin-top"></div>

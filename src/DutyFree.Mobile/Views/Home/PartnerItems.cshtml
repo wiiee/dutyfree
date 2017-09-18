@@ -1,0 +1,64 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Entity.Order
+@using DutyFree.Service.Product
+@using DutyFree.Platform.Constant
+@using DutyFree.Platform.Util
+@using System.Linq
+
+@{ 
+    var partnerOrders = ViewData["PartnerOrders"] as List<PartnerOrder>;
+    var productService = this.GetService<ProductService>();
+    double totalPrice = 0;
+}
+
+@foreach (var partnerOrder in partnerOrders)
+{
+    totalPrice = 0;
+    <div class="well">
+        @foreach (var item in partnerOrder.ProductInfos)
+        {
+            var product = productService.Get(item.Key);
+            totalPrice += product.Price * item.Value.Quantity;
+            <div class="row row-interval">
+                <div class="col-xs-4">
+                    <a href="~/Detail?productId=@item.Key"><img class="img-thumbnail" src="~/@ImgUtil.GetImgUrl(product.Logo)" alt="Logo"></a>
+                </div>
+                <div class="col-xs-8">
+                    <div>
+                        <a href="~/Detail?productId=@item.Key"><span>@Html.Raw(product.Name)</span></a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">@Html.Raw(UiSymbol.RMB + product.Price)</div>
+                        <div class="col-xs-4 col-xs-offset-4">
+                            <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + item.Value.Quantity)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <hr />
+
+        <div class="row">
+            <div class="col-xs-4 text-center"><b>合计</b></div>
+            <div class="col-xs-8">
+                <div class="row">
+                    <div class="col-xs-4">@Html.Raw(UiSymbol.RMB + totalPrice)</div>
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + partnerOrder.ProductInfos.Sum(o => o.Value.Quantity))</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-interval">
+            <div class="col-xs-12 earning-text"><b>@Html.Raw("你可以大致赚取" + UiSymbol.RMB + partnerOrder.GetEarning(totalPrice)).</b></div>
+        </div>
+
+        <div class="row row-interval">
+            <div class="col-xs-12 row-interval">
+                <button type="button" class="btn btn-info btn-block" ng-click="acceptOrder('@partnerOrder.Id')" ng-class="{gray:!isValid}">购买</button>
+            </div>
+        </div>
+    </div>
+}

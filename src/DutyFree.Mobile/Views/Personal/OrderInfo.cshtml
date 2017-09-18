@@ -1,0 +1,50 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Product
+@using DutyFree.Service.Order
+@using DutyFree.Service.Extension
+@using DutyFree.Entity.Order
+@using DutyFree.Platform.Extension
+@using DutyFree.Platform.Util
+@using DutyFree.Platform.Constant
+@using DutyFree.Service.Extension
+
+@{
+    ViewData["Title"] = "订单清单";
+    var orderInfo = this.GetService<OrderService>().GetOrderInfo(ViewData["OrderInfoId"] as string);
+    var productService = this.GetService<ProductService>();
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/personal/orderinfo.css" asp-append-version="true" />
+}
+
+@section scripts {
+    @*<script type="text/javascript" src="~/js/personal/index.js" asp-append-version="true"></script>*@
+}
+
+<div class="margin-top"></div>
+
+@foreach (var item in orderInfo.ProductInfos)
+{
+    var product = productService.Get(item.Key);
+    <div class="row row-interval">
+        <div class="col-xs-4">
+            <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+        </div>
+        <div class="col-xs-8">
+            <div>
+                <a href="~/Detail?productId=@product.Id">@Html.Raw(StringUtil.StripHtml(product.Name))</a>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">@Html.Raw(UiSymbol.RMB + orderInfo.ProductInfos[item.Key].Price)</div>
+                <div class="col-xs-4 col-xs-offset-4">
+                    <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + item.Value.Quantity)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+}
+
+

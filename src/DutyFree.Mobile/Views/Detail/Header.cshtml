@@ -1,0 +1,30 @@
+﻿@if (ViewData["IsPartner"] == null)
+{
+    <div class="navbar navbar-default navbar-fixed-top" ng-controller="tabCtrl">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-2 header-text"><a href="javascript:dutyFree.utility.back()"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                <div class="col-xs-1 header-text"></div>
+                <div class="col-xs-2 header-text" ng-class="{active:tab === 0}" ng-click="select(0)">商品</div>
+                <div class="col-xs-2 header-text" ng-class="{active:tab === 1}" ng-click="select(1)">详情</div>
+                <div class="col-xs-2 header-text" ng-class="{active:tab === 2}" ng-click="select(2)">评价</div>
+                <div class="col-xs-1 header-text"></div>
+                <div class="col-xs-2 header-text"></div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3 header-text"><a href="~/Cart"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                <div class="col-xs-6 text-center header-text"><b>@ViewData["Title"]</b></div>
+                <div class="col-xs-3 header-text"></div>
+            </div>
+        </div>
+    </div>
+}
+
+

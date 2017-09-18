@@ -1,0 +1,34 @@
+﻿@using DutyFree.Entity.Product
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "商品详情";
+    ViewData["ng-app"] = "detail";
+    var product = ViewData["Product"] as Product;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/detail/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _productId = "@product.Id";
+    </script>
+    <script type="text/javascript" src="~/lib/jquery.mobile/jquery.mobile.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/detail/index.js" asp-append-version="true"></script>
+}
+
+<div id="bodyContainer">
+    @Html.Partial("Product")
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cartMessage" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <div class="ok-circle"><span class="glyphicon glyphicon-ok-circle"></span></div>
+            <div class="add-cart-text">加入购物车成功</div>
+        </div>
+    </div>
+</div>

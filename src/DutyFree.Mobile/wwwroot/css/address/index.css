@@ -1,0 +1,43 @@
+﻿.save-and-use, .add-address {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: gray;
+    margin-top: 5px;
+    color: white;
+}
+
+.edit-address {
+    font-size: 20px;
+    color: #337ab7;
+}
+
+.address {
+    margin-top: 10px;
+}
+
+.ok {
+    font-size: 20px;
+    margin-top: 10px;
+    color: blueviolet;
+}
+
+.address-text {
+    margin-top: 5px;
+}
+
+.add-address a {
+    color: white;
+}
+
+input[type=text] {
+    background: transparent;
+    border: none;
+}
+
+input:focus{
+    outline: none;
+}
+
+.save-and-use.active, .add-address.active {
+    background-color: red;
+}

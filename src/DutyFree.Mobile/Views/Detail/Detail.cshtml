@@ -1,0 +1,25 @@
+﻿@using DutyFree.Entity.Product
+
+@{
+    var product = ViewData["Product"] as Product;
+}
+
+<div class="margin-top"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist" id="detailTab">
+            <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">商品介绍</a></li>
+            <li role="presentation"><a href="#specification" aria-controls="specification" role="tab" data-toggle="tab">商品参数</a></li>
+            <li role="presentation"><a href="#afterSale" aria-controls="afterSale" role="tab" data-toggle="tab">包装售后</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="description">@Html.Partial("Detail/Description")</div>
+            <div role="tabpanel" class="tab-pane" id="specification">@Html.Partial("Detail/Specification")</div>
+            <div role="tabpanel" class="tab-pane" id="afterSale">@Html.Partial("Detail/AfterSale")</div>
+        </div>
+    </div>
+</div>

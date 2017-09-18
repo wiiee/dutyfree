@@ -1,0 +1,25 @@
+﻿@using DutyFree.Entity.Product
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "商品详情";
+    ViewData["IsPartner"] = true;
+    ViewData["ng-app"] = "detail";
+    var product = ViewData["Product"] as Product;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/detail/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _productId = "@product.Id";
+    </script>
+    <script type="text/javascript" src="~/lib/jquery.mobile/jquery.mobile.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/detail/provider.js" asp-append-version="true"></script>
+}
+
+<div id="bodyContainer">
+    @Html.Partial("Product")
+</div>

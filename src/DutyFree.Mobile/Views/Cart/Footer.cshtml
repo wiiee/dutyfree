@@ -1,0 +1,8 @@
+﻿@if (ViewData["IsPartner"] == null)
+{
+    @Html.Partial("~/Views/Shared/Footer.cshtml")
+}
+else
+{
+    @Html.Partial("~/Views/Shared/Partner/Footer.cshtml")
+}

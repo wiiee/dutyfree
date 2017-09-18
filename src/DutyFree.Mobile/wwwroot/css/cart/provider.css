@@ -1,0 +1,17 @@
+﻿.row-interval {
+    margin-top: 5px;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-color: cadetblue;
+}
+
+.text {
+    padding-top: 5px;
+}
+
+.earning-text {
+    color: red;
+}

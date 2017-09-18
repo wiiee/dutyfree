@@ -1,0 +1,21 @@
+﻿@using DutyFree.Entity.Product
+@using DutyFree.Platform.Util
+
+@{
+    var product = ViewData["Product"] as Product;
+}
+
+<div class="margin-top"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Raw(product.Description + product.Name)
+    </div>
+
+    @foreach(var item in product.DescriptionImgIds)
+    {
+        <div class="col-xs-12">
+            <img class="img-rounded" src="~/@(ImgUtil.GetImgUrl(item))" alt="...">
+        </div>
+    }
+</div>

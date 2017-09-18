@@ -1,0 +1,10 @@
+﻿@using DutyFree.Entity.Product
+
+@{ 
+    var products = ViewData["Products"] as List<Product>;
+}
+
+@foreach(var product in products)
+{
+    @Html.Partial("Product/Item", product)
+}

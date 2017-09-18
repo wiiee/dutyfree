@@ -1,0 +1,46 @@
+﻿.check {
+    padding-top: 15px;
+    color: white;
+    min-height: 50px;
+    background-color: gray;
+}
+
+.check.active{
+    background-color: #663399;
+}
+
+.total {
+    padding-top: 15px;
+    min-height: 50px;
+}
+
+.check a {
+    color: white;
+}
+
+.header {
+    padding-top: 5px;
+}
+
+.summary {
+    padding-left: 0px;
+}
+
+.product-summary {
+    margin-top: 35px;
+}
+
+.address {
+    margin-top: 20px;
+}
+
+.quantity {
+    padding-top: 5px;
+    color: #8b008b;
+}
+
+.price-line {
+    color: red;
+    padding-top: 10px;
+    font-size: 16px;
+}

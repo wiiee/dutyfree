@@ -1,0 +1,43 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Order
+@using DutyFree.Entity.Order
+@using DutyFree.Platform.Extension
+@using DutyFree.Platform.Enum
+
+@{
+    var items = ViewData["Items"] as List<KeyValuePair<string, string>>;
+    var type = (int)ViewData["Type"];
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/personal/review.css" asp-append-version="true" />
+}
+
+@section scripts {
+    @*<script type="text/javascript" src="~/js/personal/index.js" asp-append-version="true"></script>*@
+}
+
+<div class="margin-top"></div>
+
+@if (items.IsEmpty())
+{
+    @Html.Partial("Review/Empty")
+}
+else
+{
+    @foreach (var item in items)
+    {
+        @if (type == 0)
+        {
+            @Html.Partial("Review/User/Pending", item)
+        }
+        else if (type == 1)
+        {
+            @Html.Partial("Review/User/Done", item)
+        }
+        <hr />
+    }
+}
+
+

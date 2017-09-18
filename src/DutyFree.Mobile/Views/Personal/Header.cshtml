@@ -1,0 +1,25 @@
+﻿@if (ViewData["Title"] as string == "订单清单")
+{
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-2 header-text"><a href="javascript:dutyFree.utility.back()"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                <div class="col-xs-8 header-text"><b>@ViewData["Title"]</b></div>
+                <div class="col-xs-2 header-text"></div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-2 header-text"><a href="~/Personal"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                <div class="col-xs-8 header-text"><b>@ViewData["Title"]</b></div>
+                <div class="col-xs-2 header-text"></div>
+            </div>
+        </div>
+    </div>
+}
+

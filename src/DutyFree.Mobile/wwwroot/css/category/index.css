@@ -1,0 +1,70 @@
+﻿#left, #right {
+    overflow: auto;
+    height: auto;
+    -webkit-overflow-scrolling: auto;
+    -ms-overflow-style: none;
+}
+
+/*Entirely optional – just wanted to remove the scrollbar on WebKit browsers as I find them ugly*/
+#left::-webkit-scrollbar,
+#right::-webkit-scrollbar {
+    display: none;
+}
+
+/*  Left and Right are set sizes while the Middle is set to flex one so it occupies all remaining space. This could be set as a width too if prefereable, perhaps using calc.*/
+#left {
+
+}
+
+#right {
+    margin-bottom: 45px;
+}
+
+#container {
+    display: flex;
+    overflow: hidden;
+    height: 100vh;
+    margin-top: -100px;
+    margin-bottom: -72px;
+    padding-top: 100px;
+    position: relative;
+    backface-visibility: hidden;
+    will-change: overflow;
+}
+
+/*This just stops me getting horizontal scrolling if anything overflows the width*/
+body {
+    overflow-x: hidden;
+}
+
+h3 {
+    margin-top: 0px;
+}
+
+.list-group-item {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.tab {
+    color: red;
+}
+
+.pic-text {
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.img-block {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+}
+
+.pic-bottom {
+    margin-top: 5px;
+}

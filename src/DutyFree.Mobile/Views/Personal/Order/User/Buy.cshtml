@@ -1,0 +1,49 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Order
+@using DutyFree.Platform.Enum
+@using DutyFree.Platform.Extension
+
+@{
+    var order = this.GetService<OrderService>().Get(this.GetUserId());
+
+    var unpaid = 0;
+    var confirming = 0;
+    var ongoing = 0;
+    var done = 0;
+
+    if (order != null && !order.OrderInfos.IsEmpty())
+    {
+        unpaid = order.OrderInfos.Where(o => o.IsUnpaid()).Count();
+        confirming = order.OrderInfos.Where(o => o.IsWaiting()).Count();
+        ongoing = order.OrderInfos.Where(o => o.IsOngoing()).Count();
+        done = order.OrderInfos.Where(o => o.IsDone()).Count();
+    }
+}
+
+<div class="row text-center">
+    <div class="col-xs-3">
+        <a href="~/Personal/Order?type=0">
+            <span class="glyphicon glyphicon-credit-card symbol"></span>
+            <div>待付款(@unpaid)</div>
+        </a>
+    </div>
+    <div class="col-xs-3">
+        <a href="~/Personal/Order?type=1">
+            <span class="glyphicon glyphicon-transfer symbol"></span>
+            <div>待确认(@confirming)</div>
+        </a>
+    </div>
+    <div class="col-xs-3">
+        <a href="~/Personal/Order?type=2">
+            <span class="glyphicon glyphicon-plane symbol"></span>
+            <div>待收货(@ongoing)</div>
+        </a>
+    </div>
+    <div class="col-xs-3">
+        <a href="~/Personal/Order?type=3">
+            <span class="glyphicon glyphicon-list-alt symbol"></span>
+            <div>已完成(@done)</div>
+        </a>
+    </div>
+</div>

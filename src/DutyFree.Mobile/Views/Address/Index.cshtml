@@ -1,0 +1,56 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+
+@{
+    ViewData["Title"] = "收货地址";
+    ViewData["ng-app"] = "address";
+    var user = this.GetService<UserService>().Get(this.GetUserId());
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/address/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _address = { Regions: [] };
+    </script>
+    <script type="text/javascript" src="~/js/address/index.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top"></div>
+
+<div ng-controller="addressCtrl">
+    @foreach(var item in user.Addresses)
+    {
+        var index = user.Addresses.IndexOf(item);
+        <div class="row">
+            <div class="col-xs-2 text-center ok" ng-click="selectAddress(@index)">
+                @if (index == 0)
+                {
+                    <span class="glyphicon glyphicon-ok"></span>
+                }
+            </div>
+            <div class="col-xs-8" ng-click="selectAddress(@index)">
+                <div><b>@Html.Raw(item.Name + " " + item.Phone)</b></div>
+                <div class="address-text">@Html.Raw(item.GetAddress())</div>
+            </div>
+            <div class="col-xs-2">
+                <div class="text-center address"><a href="~/Address/Edit?index=@index"><span class="glyphicon glyphicon-edit edit-address"></span></a></div>
+            </div>
+        </div>
+        <hr />
+    }
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    <div class="add-address active"><a href="~/Address/Add"><span class="glyphicon glyphicon-plus"></span> 新建地址</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

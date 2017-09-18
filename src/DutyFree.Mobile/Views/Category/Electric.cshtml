@@ -1,0 +1,95 @@
+﻿@*@using DutyFree.WebCore.Extension;
+@using DutyFree.Service.Product
+@using DutyFree.Service.Standard
+
+@{
+    var brandIds = this.GetService<ProductService>().Get(o => o.CategoryId == "Electric").Select(o => o.BrandId).Distinct().ToList();
+    var brands = this.GetService<BrandService>().GetByIds(brandIds);
+}
+
+<h3>品牌</h3>
+<div class="row">
+    @foreach (var item in brands)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.UrlEncode(item.Id)&categoryId=Bag">
+                    <img src="~/images/brand/@Html.Raw(item.Id+ ".jpg")" class="img-thumbnail" />
+                    <div class="pic-text">@Html.Raw(item.Name.Get("zh-CN"))</div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="margin-top"></div>*@
+
+<h3>品牌</h3>
+<div class="row">
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=BRAUN&categoryId=Bag">
+                <img src="/images/brand/BRAUN.jpg" class="img-thumbnail" />
+                <div class="pic-text">博朗</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=BRITA&categoryId=Bag">
+                <img src="/images/brand/BRITA.jpg" class="img-thumbnail" />
+                <div class="pic-text">碧然德</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=CANON&categoryId=Bag">
+                <img src="/images/brand/CANON.jpg" class="img-thumbnail" />
+                <div class="pic-text">佳能</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=HUROM&categoryId=Bag">
+                <img src="/images/brand/HUROM.jpg" class="img-thumbnail" />
+                <div class="pic-text">惠人</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=IROBOT&categoryId=Bag">
+                <img src="/images/brand/IROBOT.jpg" class="img-thumbnail" />
+                <div class="pic-text">IROBOT</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=LAICA&categoryId=Bag">
+                <img src="/images/brand/LAICA.jpg" class="img-thumbnail" />
+                <div class="pic-text">莱卡</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=PANASONIC&categoryId=Bag">
+                <img src="/images/brand/PANASONIC.jpg" class="img-thumbnail" />
+                <div class="pic-text">松下</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SHARP&categoryId=Bag">
+                <img src="/images/brand/SHARP.jpg" class="img-thumbnail" />
+                <div class="pic-text">夏普</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="margin-top"></div>

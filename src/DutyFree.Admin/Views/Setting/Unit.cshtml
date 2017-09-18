@@ -1,0 +1,79 @@
+﻿@using DutyFree.Platform.Enum
+
+@{
+    ViewBag.Title = "Unit";
+    ViewData["ng-app"] = "unit";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _unitValueTypes = @Html.Raw(Json.Serialize(Enum.GetNames(typeof(UnitValueType))));
+    </script>
+    <script type="text/javascript" src="~/js/setting/unit.js"></script>
+}
+
+@section breadcrumb{
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Setting</a></li>
+            <li class="active">Unit</li>
+        </ol>
+    </div>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>Unit</h1>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/HeaderMessage.cshtml")
+
+<div class="row" ng-controller="unitCtrl" ng-cloak>
+    <form method="post" ng-submit="submit()">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Properties <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ng-click="addItem()"></span></h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-4">Id</div>
+                                    <div class="col-md-4">Description</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in items">
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input class="form-control" ng-model="item.Id" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" ng-model="item.Description" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="glyphicon glyphicon-remove" ng-if="items.length > 0" ng-click="removeItem(item.Index)"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="reset" class="btn btn-default left-margin" ng-click="reset($event)">Reset</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

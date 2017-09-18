@@ -1,0 +1,18 @@
+﻿<div class="navbar navbar-default navbar-fixed-bottom" ng-controller="footerCtrl">
+    <div class="container-fluid">
+        <div class="row footer text-center">
+            <div class="col-xs-4" ng-click="go('Home/Partner')" ng-class="{current:currentTab === 0}">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                <div class="footer-text">首页</div>
+            </div>
+            <div class="col-xs-4" ng-click="go('Cart/Partner')" ng-class="{current:currentTab === 2}">
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                <div class="footer-text">待购列表({{partnerOrderQuantity}})</div>
+            </div>
+            <div class="col-xs-4" ng-click="go('Personal')" ng-class="{current:currentTab === 3}">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="footer-text">个人中心</div>
+            </div>
+        </div>
+    </div>
+</div>

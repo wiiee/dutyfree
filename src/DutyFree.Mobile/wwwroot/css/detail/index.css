@@ -1,0 +1,125 @@
+﻿.add-cart {
+    background-color: red;
+    min-height: 50px;
+    padding-top: 15px;
+    color: white;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.price {
+    color: red;
+    font-size: 20px;
+    padding-top: 5px;
+}
+
+#cartMessage {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -80px;
+    margin-left: -140px;
+    padding: 20px;
+}
+
+.ok-circle {
+    font-size: 36px;
+    margin-top: 15px;
+    color: blueviolet;
+}
+
+.add-cart-text {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 36px;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+
+.carousel-control {
+    opacity: 1;
+}
+
+hr {
+    border-top-color: #5F9EA0;
+}
+
+.pic-bottom {
+    margin-top: 0px;
+}
+
+.carousel-caption {
+    bottom: 5px;
+    right: 15px;
+    left: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.badge {
+    font-size: 16px;
+}
+
+.header-text {
+    min-height: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.header-text.active {
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #000000;
+}
+
+#detailTab {
+    border:none;
+}
+
+#detailTab a {
+    color: #000000;
+}
+
+#detailTab li {
+    width: 33.33333333%;
+    text-align: center;
+}
+
+#detailTab > li.active a {
+    border: none;
+    color: red;
+}
+
+#detailTab > li {
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    border-color: lightgrey;
+}
+
+#detailTab > li:last-child {
+    border: none;
+}
+
+.star {
+    color: #663399;
+}
+
+.row-star {
+    margin-top: 5px;
+}
+
+.row-content {
+    margin-top: 5px;
+}
+
+.img-rounded {
+    max-width: 100%;
+}
+
+.add-cart a {
+    color: white;
+}

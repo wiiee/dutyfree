@@ -1,0 +1,25 @@
+﻿@using DutyFree.WebCore.Extension;
+@using DutyFree.Service.Product
+@using DutyFree.Service.Standard
+
+@{
+    var brandIds = this.GetService<ProductService>().Get(o => o.CategoryId == "Perfume").Select(o => o.BrandId).Distinct().ToList();
+    var brands = this.GetService<BrandService>().GetByIds(brandIds);
+}
+
+<h3>品牌</h3>
+<div class="row">
+    @foreach (var item in brands)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.Encode(item.Id)&categoryId=Bag">
+                    <img src="~/api/img/@Html.Raw(item.Logo)?height=100&width=100" class="img-thumbnail" />
+                    <div class="pic-text">@Html.Raw(item.Name.Get("zh-CN"))</div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="margin-top"></div>

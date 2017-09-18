@@ -1,0 +1,20 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Extension
+@using DutyFree.Entity.Order
+@using DutyFree.Platform.Constant
+
+@{
+    ViewData["Title"] = "结算中……";
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/js/payment/confirm.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top"></div>
+
+<div class="row">
+    谢谢你的惠顾，祝您生活愉快。<span id="second">6</span>秒后将跳转到首页。
+</div>
+<hr />

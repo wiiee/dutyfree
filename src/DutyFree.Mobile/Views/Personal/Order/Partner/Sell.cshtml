@@ -1,0 +1,47 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Order
+@using DutyFree.Platform.Enum
+@using DutyFree.Platform.Extension
+@using DutyFree.Entity.Order
+
+@{
+    var preferenceService = this.GetService<PreferenceService>();
+    var partnerOrderService = this.GetService<PartnerOrderService>();
+    var partnerOrders = new List<PartnerOrder>();
+
+    var preference = preferenceService.Get(this.GetUserId());
+
+    var pending = 0;
+    var ongoing = 0;
+    var done = 0;
+
+    if (preference != null && !preference.PartnerOrderIds.IsEmpty())
+    {
+        partnerOrders = partnerOrderService.GetByIds(preference.PartnerOrderIds);
+        pending = partnerOrders.Where(o => o.Status == Status.Pending).Count();
+        ongoing = partnerOrders.Where(o => o.Status == Status.Ongoing).Count();
+        done = partnerOrders.Where(o => o.Status == Status.Done).Count();
+    }
+}
+
+<div class="row text-center">
+    <div class="col-xs-4">
+        <a href="~/Personal/PartnerOrder?type=0">
+            <span class="glyphicon glyphicon-credit-card symbol"></span>
+            <div>待购(@pending)</div>
+        </a>
+    </div>
+    <div class="col-xs-4">
+        <a href="~/Personal/PartnerOrder?type=1">
+            <span class="glyphicon glyphicon-plane symbol"></span>
+            <div>待交货(@ongoing)</div>
+        </a>
+    </div>
+    <div class="col-xs-4">
+        <a href="~/Personal/PartnerOrder?type=2">
+            <span class="glyphicon glyphicon-list-alt symbol"></span>
+            <div>已完成(@done)</div>
+        </a>
+    </div>
+</div>

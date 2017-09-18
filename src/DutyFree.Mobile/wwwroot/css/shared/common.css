@@ -1,0 +1,50 @@
+﻿.header {
+    padding-top: 8px;
+}
+
+.header-text {
+    padding-top: 15px;
+}
+
+.footer {
+    padding-top: 5px;
+}
+
+/*.headerIcon {
+    padding-top: 5px;
+    font-size: 20px;
+    color: rebeccapurple;
+}*/
+
+.footer .glyphicon {
+    font-size: 20px;
+}
+
+.current {
+    /*color: crimson;*/
+    color: #ed145b;
+}
+
+.footer-text {
+    font-size: 12px;
+}
+
+.navbar-default {
+    background-color: white;
+}
+
+.bottom {
+    margin-top: 50px;
+}
+
+.margin-top {
+    margin-top: 15px;
+}
+
+.margin-bottom {
+    margin-bottom: 15px;
+}
+
+[ng-cloak] {
+  display: none !important;
+}

@@ -1,0 +1,21 @@
+﻿<div class="row">
+    <div class="col-xs-3">收件人</div>
+    <div class="col-xs-7"><input type="text" ng-model="address.Name" placeholder="称呼" /></div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-xs-3">手机号码</div>
+    <div class="col-xs-7"><input type="text" ng-model="address.Phone" placeholder="手机" /></div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-xs-3">地区</div>
+    <div class="col-xs-7" ng-click="editRegion()">{{getRegion()}}</div>
+    <div class="col-xs-2" ng-click="editRegion()"><span class="glyphicon glyphicon-chevron-right edit-address"></span></div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-xs-3">详细地址</div>
+    <div class="col-xs-7"><input type="text" ng-model="address.Text" placeholder="详细地址" /></div>
+</div>
+<hr />

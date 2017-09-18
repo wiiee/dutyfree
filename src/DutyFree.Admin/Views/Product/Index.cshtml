@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Products";
+    ViewData["ng-app"] = "products";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/product/index.css" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="~/lib/bootbox.js/bootbox.js"></script>
+
+    <script type="text/javascript">
+
+    </script>
+
+    <script type="text/javascript" src="~/lib/angular-smart-table/dist/smart-table.js"></script>
+    <script type="text/javascript" src="~/js/product/index.js" asp-append-version="true"></script>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>Products</h1>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/HeaderMessage.cshtml")
+
+@Html.Partial("Products")
+

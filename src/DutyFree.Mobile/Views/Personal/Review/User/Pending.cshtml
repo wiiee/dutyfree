@@ -1,0 +1,30 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Entity.Product
+@using DutyFree.Platform.Constant
+@using DutyFree.Service.Product
+@using DutyFree.Platform.Util
+
+@model KeyValuePair<string, string>
+
+@{
+    var productService = this.GetService<ProductService>();
+    var product = productService.Get(Model.Key);
+}
+
+<div class="well">
+    <div class="row">
+        <div class="col-xs-3">
+            <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+        </div>
+        <div class="col-xs-9">
+            <a href="~/Detail?productId=@product.Id">@Html.Raw(StringUtil.StripHtml(product.Name))</a>
+        </div>
+    </div>
+
+    <div class="row margin-top">
+        <div class="col-xs-12">
+            <a class="btn btn-info btn-block" href="~/Review/Add?orderInfoId=@Model.Value&productId=@Model.Key">去评价</a>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@using DutyFree.Entity.Product
+@using DutyFree.Platform.Constant
+
+@{ 
+    var product = ViewData["Product"] as Product;
+}
+
+<div class="margin-top"></div>
+
+<div class="margin-top"></div>
+<h4>包装清单：</h4>
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Raw(product.Name) @Html.Raw(UiSymbol.QUANTITY) 1
+    </div>
+</div>
+
+<div class="margin-top"></div>
+<h4>售后服务：</h4>
+<div class="row">
+    <div class="col-xs-12">
+        <ol>
+            <li>化妆品及个人护理用品，因使用后造成商品不完好的，不适用七天无理由退货；如确属商品质量问题的，可办理退货，但申请退货时商品已过期或离过期不到3个月的情况除外(活动及清仓商品除外，例如：因商品保质期将到和外包装有损包括在内的所有活动清仓商品，我司在活动中已明确说明的，不予退换货。请顾客对此类商品谨慎购买!)，因个人喜好(气味，色泽、型号，外观)和个人肤质不同要求的退货除外。</li>
+            <li>购买化妆品请当场验收，若商品有破损，渗漏，缺少，配送有误等问题，请当即与我司客服人员联系。</li>
+            <li>我们保证商品的进货渠道和质量，如果客户在使用时对商品质量表示置疑，请出具书面鉴定，我们会按照国家法律规定予以处理。</li>
+            <li>如遇过敏问题产生退货需要提供正规医院的相关证明。 </li>
+        </ol>
+    </div>
+</div>
+
+<div class="margin-top"></div>
+
+<h4>价格说明</h4>
+<div class="row">
+    <div class="col-xs-12">
+        <ul>
+            <li>页面上展示的价格为商品的销售价，是您最终决定是否购买商品的依据。</li>
+        </ul>
+    </div>
+</div>

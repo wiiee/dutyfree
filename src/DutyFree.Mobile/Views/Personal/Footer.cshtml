@@ -1,0 +1,19 @@
+﻿@using DutyFree.WebCore.Constant
+@using Microsoft.AspNetCore.Http;
+@using DutyFree.Platform.Enum
+
+@{
+    var userType = (UserType)Context.Session.GetInt32(SessionKey.USER_TYPE);
+}
+
+@if (ViewData["Title"] as string == "个人中心")
+{
+    @if (userType == UserType.User)
+    {
+        @Html.Partial("~/Views/Shared/Footer.cshtml")
+    }
+    else if (userType == UserType.Partner)
+    {
+        @Html.Partial("~/Views/Shared/Partner/Footer.cshtml")
+    }
+}

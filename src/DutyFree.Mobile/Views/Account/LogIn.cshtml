@@ -1,0 +1,62 @@
+﻿@using DutyFree.WebCore.Extension
+
+@{ 
+    ViewData["Title"] = "登录";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/account/login.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/crypto/core-min.js"></script>
+    <script type="text/javascript" src="~/lib/crypto/md5-min.js"></script>
+    <script type="text/javascript" src="~/lib/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"></script>
+    <script type="text/javascript" src="~/lib/jQuery-Form-Validator/form-validator/security.js"></script>
+    <script type="text/javascript" src="~/js/shared/utility.js" asp-append-version="true"></script>
+    <script src="~/js/account/login.js" asp-append-version="true"></script>
+}
+
+<div class="row-margin">
+    <form method="post" action="~/Account/LogIn">
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3 text">
+                用户名
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" id="id" name="id" data-validation="custom" data-validation-regexp="^([0-9]{11})$"  data-validation-error-msg="请输入11位手机号码" />
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3 text">
+                密码
+            </div>
+            <div class="col-xs-7">
+                <input type="password" class="form-control" id="rawPassword" data-validation="length" data-validation-length="min3"  data-validation-error-msg="密码长度至少三位" />
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
+                <button type="submit" class="btn btn-info form-control">登陆</button>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-5"><a href="~/Account/SignUp">手机快速注册</a></div>
+            <div class="col-xs-5"><span class="pull-right"><a href="#">找回密码</a></span></div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <input type="hidden" name="password" id="password" />
+        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+    </form>
+</div>

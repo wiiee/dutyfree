@@ -1,0 +1,35 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="region" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">所在地区</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" ng-controller="regionCtrl">
+                    <div class="col-xs-12" id="region-tab">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" ng-repeat="(key, value) in regions"><a href="#{{key}}" aria-controls="{{key}}" role="tab" data-toggle="tab">{{value.Name}}</a></li>
+                            <li role="presentation" ng-if="hasNext()"><a href="#{{size}}" aria-controls="{{size}}" role="tab" data-toggle="tab">请选择</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane" ng-repeat="(key, value) in areas" id="{{key}}">
+                                <div class="row">
+                                    <div class="col-xs-4 region-name" ng-repeat="item in value" ng-class="{selectedRegion:item.Id === regions[key].Id}" ng-click="selectRegion(item, key)">
+                                        {{item.Name}} <span class="glyphicon glyphicon-ok" ng-if="item.Id === regions[key].Id"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

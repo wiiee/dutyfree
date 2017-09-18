@@ -1,0 +1,53 @@
+﻿@{
+    var col = 4;
+}
+
+<div ng-controller="productsCtrl" ng-cloak>
+    <div class="row top-margin">
+        <table st-safe-src="rowCollection" st-table="displayedCollection" st-set-filter="customFilter" class="table" id="products">
+            <thead>
+                <tr>
+                    <th st-sort="Name">Name</th>
+                    <th st-sort="Category">Category</th>
+                    <th st-sort="Brand">Brand</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="@col">
+                        <a ng-bind="searchText" ng-click="switchSearch()">Show Condition</a>
+                    </td>
+                </tr>
+                <tr collapse="isCollapsed">
+                    <td colspan="@col">
+                        <div class="row">
+                            <div class="col-md-2"><span class="searchLabel">Global Search</span></div>
+                            <div class="col-md-8">
+                                <input st-search class="form-control" type="search" />
+                            </div>
+                            <div class="col-md-1"><span class="searchLabel">Page size</span></div>
+                            <div class="col-md-1">
+                                <input class="form-control" name="items" id="items" type="number" step="5" ng-model="itemsByPage" ng-blur="changeSize()">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-repeat="row in displayedCollection" class="projectTr">
+                    <td title="{{row.Description}}"><a target="_blank" href="~/Product/Product?productId={{row.Id}}">{{row.Name}}</a></td>
+                    <td title="{{row.CategoryId}}">{{row.CategoryId}}</td>
+                    <td title="{{row.BrandId}}">{{row.BrandId}}</td>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="@col">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-template="../template/stPagination.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

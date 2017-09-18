@@ -1,0 +1,33 @@
+﻿<div class="row">
+    <h2>Default <input class="form-control" ng-model="item.Default" /><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ng-click="addValue()"></span></h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-md-2">Culture</div>
+                        <div class="col-md-2">Value</div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="value in item.Values">
+                <td>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <select class="form-control" ng-model="item.Names[$index]" data-validation="required"
+                                    ng-options="name for name in cultureNames"></select>
+                        </div>
+                        <div class="col-md-2"><input class="form-control" ng-model="item.Values[item.Names[$index]]"></div>
+                        <div class="col-md-2">
+                            <span ng-click="deleteProject(row.Id)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

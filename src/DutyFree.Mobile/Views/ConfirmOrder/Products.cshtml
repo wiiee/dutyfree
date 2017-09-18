@@ -1,0 +1,46 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.Product
+@using DutyFree.Service.User
+@using DutyFree.Service.Extension
+@using DutyFree.Platform.Extension
+@using DutyFree.Platform.Util
+@using DutyFree.Platform.Constant
+
+@{
+    ViewData["Title"] = "商品清单";
+    var preference = this.GetService<PreferenceService>().Get(this.GetUserId());
+    var productIds = preference.GetPendingOrderProductIds();
+    var products = this.GetService<ProductService>().GetByIds(productIds);
+    var count = preference.GetPendingOrderCount();
+    ViewData["TotalPrice"] = preference.GetTotalPrice();
+    ViewData["Count"] = count;
+    var user = this.GetService<UserService>().Get(this.GetUserId());
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/confirmorder/products.css" />
+}
+
+<div class="margin-top"></div>
+
+@foreach (var product in products)
+{
+    <div class="row row-interval">
+        <div class="col-xs-4">
+            <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+        </div>
+        <div class="col-xs-8">
+            <div>
+                <a href="~/Detail?productId=@product.Id">@Html.Raw(StringUtil.StripHtml(product.Name))</a>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">@(UiSymbol.RMB + product.GetPrice())</div>
+                <div class="col-xs-4 col-xs-offset-4">
+                    <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + @preference.Carts[product.Id].Quantity)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+}
+

@@ -1,0 +1,22 @@
+﻿@using DutyFree.Entity.Product
+@using DutyFree.Platform.Constant
+@using DutyFree.Service.Extension
+@using DutyFree.Platform.Util
+
+@model Product
+
+<div class="col-xs-6">
+    <div class="thumbnail">
+        <a href="~/Detail?productId=@Model.Id"><img src="~/@(ImgUtil.GetImgUrl(Model.Logo))" alt="..."></a>
+        <div class="caption">
+            <h4 class="title"><a href="~/Detail?productId=@Model.Id">@Html.Raw(Model.Name)</a></h4>
+            <p>
+                <span class="price">@Html.Raw(UiSymbol.RMB + Model.GetPrice())</span>
+                <span class="price"><del>@Html.Raw(UiSymbol.RMB + Model.MarketPrice)</del></span>
+                <span class="pull-right">
+                    <a href="javascript:void(0)" class="btn btn-default" role="button" ng-click="addToCart('@Html.Raw(Model.Id)')"><span class="glyphicon glyphicon-shopping-cart buy-it"></span></a>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>

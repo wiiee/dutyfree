@@ -1,0 +1,28 @@
+﻿.row-interval {
+    margin-top: 5px;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-color: cadetblue;
+}
+
+.earning-text {
+    color: red;
+}
+
+.helper-text {
+    font-size: 8px;
+    margin-top: -10px;
+}
+
+.gray {
+    background-color: gray;
+    border-color: gray;
+}
+
+.btn-info:hover {
+    background-color: gray;
+    border-color: gray;
+}

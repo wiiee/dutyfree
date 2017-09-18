@@ -1,0 +1,13 @@
+﻿.item {
+    padding-top: 20px;
+    padding-left: 0px;
+}
+
+.quantity {
+    padding-top: 5px;
+    color: darkmagenta;
+}
+
+.bottom {
+    margin-top: 0px;
+}

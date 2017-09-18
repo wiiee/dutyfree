@@ -1,0 +1,30 @@
+﻿tr.projectTr td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+.searchLabel {
+    height: 34px;
+    line-height: 34px !important;
+}
+
+#numOfPage{
+    padding: 4px 16px;
+}
+
+page-select input{
+    max-width: 60px;
+    max-height: 24px;
+}
+
+.pagination{
+    margin: 5px;
+}

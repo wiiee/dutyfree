@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DutyFree.Admin</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="~/css/shared/common.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @RenderSection("css", required: false)
+</head>
+<body @if (ViewData["ng-app"] != null) { <text> ng-app="@ViewData["ng-app"]" </text>  }>
+    <div class="navbar navbar-default" id="header">
+        @Html.Partial("~/Views/Shared/Header.cshtml")
+    </div>
+    <div class="container body-content">
+        @RenderSection("breadcrumb", required: false)
+        @RenderBody()
+
+        @Html.Partial("~/Views/Shared/Footer.cshtml")
+    </div>
+
+    <environment names="Development">
+        <script type="text/javascript">
+            var _basePath = "@Context.Request.PathBase";
+            var _host = "@Context.Request.Host";
+        </script>
+
+        <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/lib/underscore/underscore.min.js"></script>
+        <script type="text/javascript" src="~/lib/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
+        <script type="text/javascript" src="~/js/shared/utility.js"></script>
+        <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+
+        @if (ViewData["ng-app"] != null)
+        {
+            <script type="text/javascript" src="~/lib/angular/angular.min.js"></script>
+            <script type="text/javascript" src="~/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        }
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿@using DutyFree.Entity.Order
+@using DutyFree.Platform.Constant
+
+@model OrderInfo
+
+<div class="well">
+    @Html.Partial("Order/User/Pics", Model)
+
+    <div class="row margin-top">
+        <div class="col-xs-12">
+            <span>确认中，请耐心等待</span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <span class="pull-right">@Html.Raw(string.Format("共{0}件商品 应付款: {1}{2}", Model.GetCount(), UiSymbol.RMB, Model.TotalPrice))</span>
+    </div>
+</div>

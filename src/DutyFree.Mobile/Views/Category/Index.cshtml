@@ -1,0 +1,54 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.Standard
+
+@{
+    ViewData["Title"] = "Category";
+    ViewData["ng-app"] = "category";
+    var brands = this.GetService<BrandService>().Get();
+
+    var tabs = new Dictionary<string, string>() {
+        //{"A and N", "澳新品牌"},
+        //{"United States", "美国品牌"},
+        //{"France", "法国品牌"},
+        //{"South Korea", "韩国品牌"},
+        //{"Italy", "意大利品牌"},
+        //{"England", "英国品牌"},
+        //{"Japan", "日本品牌"},
+        //{"German", "德国品牌"},
+        //{"H and T", "港台品牌"},
+        {"Brands", "国际品牌"},
+        {"Cosmetics", "个护化妆"},
+        {"Perfume", "香水"},
+        {"Bag", "品牌箱包"},
+        {"Health", "营养保健"},
+        {"Cloth", "名流服饰"},
+        {"Electric", "家用电器"},
+        {"Digit", "手机数码"},
+        {"Baby", "母婴童装"}
+    };
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/category/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/js/category/index.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top"></div>
+
+<div class="row" id="container" ng-controller="categoryCtrl">
+    <div class="col-xs-4" id="left">
+        <ul class="list-group text-center">
+            @for (int i = 0; i < tabs.Count; i++)
+            {
+                var item = tabs.ElementAt(i);
+                <li class="list-group-item" ng-class="{tab:tab === @i}"><span ng-click="getItem('@item.Key', @i)">@Html.Raw(item.Value)</span></li>
+            }
+        </ul>
+    </div>
+    <div class="col-xs-8" id="right">
+        @Html.Partial("Brands")
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿.add-review {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: gray;
+    margin-top: 5px;
+    color: white;
+}
+
+.add-review a {
+    color: white;
+}
+
+.add-review.active {
+    background-color: red;
+}
+
+.star {
+    font-size: 30px;
+    color: #663399;
+}

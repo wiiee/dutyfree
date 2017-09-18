@@ -1,0 +1,17 @@
+﻿@if (ViewData["Title"] as string == "Download")
+{
+}
+else if (ViewData["IsPartner"] == null)
+{
+    @Html.Partial("~/Views/Shared/Header.cshtml")
+}
+else
+{
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-12 header-text"><b>购物列表</b></div>
+            </div>
+        </div>
+    </div>
+}

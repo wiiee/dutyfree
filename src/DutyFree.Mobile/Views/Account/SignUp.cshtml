@@ -1,0 +1,101 @@
+﻿@using DutyFree.WebCore.Constant
+@using Microsoft.AspNetCore.Http;
+@using DutyFree.Platform.Enum
+
+@{
+    ViewData["Title"] = "注册";
+    var userType = (UserType)Context.Session.GetInt32(SessionKey.USER_TYPE);
+    var name = "recommendUserId";
+
+    if(userType == UserType.Partner)
+    {
+        name = "recommendPartnerId";
+    }
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/account/signup.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/crypto/core-min.js"></script>
+    <script type="text/javascript" src="~/lib/crypto/md5-min.js"></script>
+    <script type="text/javascript" src="~/lib/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"></script>
+    <script type="text/javascript" src="~/lib/jQuery-Form-Validator/form-validator/security.js"></script>
+    <script type="text/javascript" src="~/js/shared/utility.js" asp-append-version="true"></script>
+    <script src="~/js/account/signup.js" asp-append-version="true"></script>
+}
+
+<div class="row-margin">
+    <form method="post" action="~/Account/SignUp">
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3 text">
+                用户名
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" id="id" name="id" data-validation="custom" data-validation-regexp="^([0-9]{11})$" placeholder="手机号码" data-validation-error-msg="请输入11位手机号码" />
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3 text">
+                密码
+            </div>
+            <div class="col-xs-7">
+                <input type="password" class="form-control" id="rawPassword" name="rawPassword" data-validation="length" data-validation-length="min3" data-validation-error-msg="密码长度至少三位" />
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3 text">
+                确认密码
+            </div>
+            <div class="col-xs-7">
+                <input type="password" class="form-control" data-validation="confirmation" data-validation-confirm="rawPassword" data-validation-error-msg="确认密码不对" />
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3 text">
+                推荐人(可选)
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" id="recommendUserId" name="@name" data-validation="custom" data-validation-regexp="^$|(^[0-9]{11})$" placeholder="推荐人手机号码" data-validation-error-msg="请输入正确的推荐人手机号码" />
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
+                <button type="submit" class="btn btn-info form-control">注册</button>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-11">已有账号？<a href="~/Account/LogIn">登陆</a></div>
+        </div>
+
+        <hr />
+        <div class="row margin-top">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
+                <h4>说明</h4>
+                <span class="text-danger">你的推荐人将获得你购物第一单5%金额的奖励。</span>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+        <input type="hidden" name="password" id="password" />
+        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+    </form>
+</div>

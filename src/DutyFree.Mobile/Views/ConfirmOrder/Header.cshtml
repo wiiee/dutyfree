@@ -1,0 +1,24 @@
+﻿@if (ViewData["Title"] as string == "商品清单")
+{
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3 header-text"><a href="~/ConfirmOrder"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                <div class="col-xs-6 text-center header-text"><b>商品清单</b></div>
+                <div class="col-xs-3 header-text">@Html.Raw("共" + ViewData["Count"] as string + "件")</div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3 header-text"><a href="~/Cart"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                <div class="col-xs-6 text-center header-text"><b>确认订单</b></div>
+                <div class="col-xs-3 header-text"></div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,138 @@
+﻿@using DutyFree.Platform.Enum
+
+@{
+    ViewData["ng-app"] = "product";
+
+    var productId = ViewData["ProductId"] as string;
+    var title = string.IsNullOrEmpty(productId) ? "Add A Product" : "Edit Product";
+
+    ViewBag.Title = title;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/lib/bootstrap-fileinput/css/fileinput.min.css" />
+    <link rel="stylesheet" href="~/css/product/product.css" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script type="text/javascript">
+        var _productId = "@Html.Raw(productId)";
+        var _statuses = @Html.Raw(Json.Serialize(Enum.GetNames(typeof(ProductStatus))));
+    </script>
+    <script type="text/javascript" src="~/js/product/product.js" asp-append-version="true"></script>
+}
+
+@section breadcrumb{
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Product</a></li>
+            <li class="active">@Html.Raw(title)</li>
+        </ol>
+    </div>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>@Html.Raw(title)</h1>
+    </div>
+</div>
+
+<div class="row" ng-controller="productCtrl" ng-cloak>
+    <form method="post" ng-submit="submit()">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label>Name</label>
+                <input class="form-control" ng-model="product.Name" data-validation="required" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label>Description</label>
+                <textarea class="form-control" ng-model="product.Description" data-validation="required"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label>Brand</label>
+                <select class="form-control" ng-model="product.BrandId" data-validation="custom" data-validation-regexp="^([^\?].+)$"
+                        ng-options="brandId for brandId in brandIds"></select>
+            </div>
+            <div class="form-group col-md-2" ng-repeat="categoryIds in categoryChain">
+                <label>Category {{$index}}</label>
+                <select class="form-control" ng-model="product.CategoryId[$index]" ng-change="updateCategory($index)" data-validation="custom" data-validation-regexp="^([^\?].+)$"
+                        ng-options="categoryId for categoryId in categoryIds"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label">Status</label>
+                <select class="form-control" ng-model="product.ProductStatus" data-validation="required"
+                        ng-options="statuses.indexOf(selectedItem) as selectedItem for selectedItem in statuses"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label">Logo</label>
+                <input id="logo" type="file" accept="image/*" class="file-loading">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label">Imgs</label>
+                <input id="imgs" type="file" accept="image/*" class="file-loading">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>Cost</label>
+                <input class="form-control" ng-model="product.Cost" data-validation="required" />
+            </div>
+            <div class="col-md-4">
+                <label>Price</label>
+                <input class="form-control" ng-model="product.Price" data-validation="required" />
+            </div>
+            <div class="col-md-4">
+                <label>Market Price</label>
+                <input class="form-control" ng-model="product.MarketPrice" data-validation="required" />
+            </div>
+        </div>
+
+        <h2>Properties <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addProperty()"></span></h2>
+        <div class="row" ng-repeat="property in product.Properties">
+            <div class="col-md-2">
+                <label>Id <span class="glyphicon glyphicon-plus" ng-click="addValue(property)" ng-if="property.Id"></span></label>
+                <select class="form-control" ng-model="property.Id" data-validation="required"
+                        ng-options="item for item in propertyIds"></select>
+            </div>
+            <div ng-repeat="value in property.Values">
+                <div class="col-md-1">
+                    <label>Unit</label>
+                    <select class="form-control" ng-model="value.Key" data-validation="required"
+                            ng-options="unit for unit in getUnits(property.Id)"></select>
+                </div>
+                <div class="col-md-1">
+                    <label>Value</label>
+                    <input class="form-control" ng-model="value.Value" data-validation="required" />
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="reset" class="btn btn-default left-margin" ng-click="reset($event)">Reset</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

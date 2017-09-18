@@ -1,0 +1,29 @@
+﻿.recommend-text {
+    color:red;
+}
+
+.glyphicon-credit-card {
+    font-size: 20px;
+    color: rebeccapurple;
+}
+
+.recommend-person-text {
+    padding-top: 5px;
+}
+
+.price {
+    color: red;
+    font-size: 18px;
+}
+
+.payment-text {
+    padding-top: 10px;
+}
+
+.payment {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    color: white;
+    background-color: red;
+}

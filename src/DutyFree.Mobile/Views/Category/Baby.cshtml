@@ -1,0 +1,71 @@
+﻿@*@using DutyFree.WebCore.Extension;
+@using DutyFree.Service.Product
+@using DutyFree.Service.Standard
+
+@{
+    var brandIds = this.GetService<ProductService>().Get(o => o.CategoryId == "Baby").Select(o => o.BrandId).Distinct().ToList();
+    var brands = this.GetService<BrandService>().GetByIds(brandIds);
+}
+
+<h3>品牌</h3>
+<div class="row">
+    @foreach (var item in brands)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.UrlEncode(item.Id)&categoryId=Baby">
+                    <img src="~/images/brand/@Html.Raw(item.Id+ ".jpg")" class="img-thumbnail" />
+                    <div class="pic-text">@Html.Raw(item.Name.Get("zh-CN"))</div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="margin-top"></div>*@
+
+<h3>品牌</h3>
+<div class="row">
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=AVENT&categoryId=Baby">
+                <img src="/images/brand/AVENT.jpg" class="img-thumbnail" />
+                <div class="pic-text">新安怡</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=CROBE&categoryId=Baby">
+                <img src="/images/brand/CROBE.jpg" class="img-thumbnail" />
+                <div class="pic-text">CROBE</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=GREENFINGER&categoryId=Baby">
+                <img src="/images/brand/GREENFINGER.jpg" class="img-thumbnail" />
+                <div class="pic-text">绿手指</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MERRIES&categoryId=Baby">
+                <img src="/images/brand/MERRIES.jpg" class="img-thumbnail" />
+                <div class="pic-text">花王妙而舒</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MOONY&categoryId=Baby">
+                <img src="/images/brand/MOONY.jpg" class="img-thumbnail" />
+                <div class="pic-text">尤妮佳</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="margin-top"></div>

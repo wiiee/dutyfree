@@ -1,0 +1,338 @@
+﻿@*@using DutyFree.WebCore.Extension;
+@using DutyFree.Service.Product
+@using DutyFree.Service.Standard
+
+@{
+    var brandIds = this.GetService<ProductService>().Get(o => o.CategoryId == "Bag").Select(o => o.BrandId).Distinct().ToList();
+    var brands = this.GetService<BrandService>().GetByIds(brandIds);
+}
+
+<h3>品牌</h3>
+<div class="row">
+    @foreach (var item in brands)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.UrlEncode(item.Id)&categoryId=Bag">
+                    <img src="~/images/brand/@Html.Raw(item.Id+ ".jpg")" class="img-thumbnail" />
+                    <div class="pic-text">@Html.Raw(item.Name.Get("zh-CN"))</div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="margin-top"></div>*@
+
+
+
+
+<h3>品牌</h3>
+<div class="row">
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=ARMANI%20JEANS&categoryId=Bag">
+                <img src="/images/brand/ARMANI JEANS.jpg" class="img-thumbnail" />
+                <div class="pic-text">ARMANI JEANS</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=BURBERRY&categoryId=Bag">
+                <img src="/images/brand/BURBERRY.jpg" class="img-thumbnail" />
+                <div class="pic-text">博柏利</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=COACH&categoryId=Bag">
+                <img src="/images/brand/COACH.jpg" class="img-thumbnail" />
+                <div class="pic-text">蔻驰</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=DESIGN%20INVERSO&categoryId=Bag">
+                <img src="/images/brand/DESIGN INVERSO.jpg" class="img-thumbnail" />
+                <div class="pic-text">DESIGN INVERSO</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=DUNHILL&categoryId=Bag">
+                <img src="/images/brand/DUNHILL.jpg" class="img-thumbnail" />
+                <div class="pic-text">登喜路</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=EMART&categoryId=Bag">
+                <img src="/images/brand/EMART.jpg" class="img-thumbnail" />
+                <div class="pic-text">易买得</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=FENDI&categoryId=Bag">
+                <img src="/images/brand/FENDI.jpg" class="img-thumbnail" />
+                <div class="pic-text">芬迪</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=FURLA&categoryId=Bag">
+                <img src="/images/brand/FURLA.jpg" class="img-thumbnail" />
+                <div class="pic-text">芙拉</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=GALATINE&categoryId=Bag">
+                <img src="/images/brand/GALATINE.jpg" class="img-thumbnail" />
+                <div class="pic-text">佳乐锭</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=GRAFEA&categoryId=Bag">
+                <img src="/images/brand/GRAFEA.jpg" class="img-thumbnail" />
+                <div class="pic-text">GRAFEA</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=GUCCI&categoryId=Bag">
+                <img src="/images/brand/GUCCI.jpg" class="img-thumbnail" />
+                <div class="pic-text">古驰</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=JIUR&categoryId=Bag">
+                <img src="/images/brand/JIUR.jpg" class="img-thumbnail" />
+                <div class="pic-text">九日</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=KARL%20LAGERFELD&categoryId=Bag">
+                <img src="/images/brand/KARL LAGERFELD.jpg" class="img-thumbnail" />
+                <div class="pic-text">卡尔·拉格斐</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=KATE%20SPADE&categoryId=Bag">
+                <img src="/images/brand/KATE SPADE.jpg" class="img-thumbnail" />
+                <div class="pic-text">凯特·丝蓓</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=KENZO&categoryId=Bag">
+                <img src="/images/brand/KENZO.jpg" class="img-thumbnail" />
+                <div class="pic-text">高田贤三</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=KOBAYASHI&categoryId=Bag">
+                <img src="/images/brand/KOBAYASHI.jpg" class="img-thumbnail" />
+                <div class="pic-text">小林制药</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=LES%20PETITS%20JOUEURS&categoryId=Bag">
+                <img src="/images/brand/LES PETITS JOUEURS.jpg" class="img-thumbnail" />
+                <div class="pic-text">LES PETITS JOUEURS</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=LOACKER&categoryId=Bag">
+                <img src="/images/brand/LOACKER.jpg" class="img-thumbnail" />
+                <div class="pic-text">莱家</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=LONGCHAMP&categoryId=Bag">
+                <img src="/images/brand/LONGCHAMP.jpg" class="img-thumbnail" />
+                <div class="pic-text">珑骧</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=LOTTE&categoryId=Bag">
+                <img src="/images/brand/LOTTE.jpg" class="img-thumbnail" />
+                <div class="pic-text">乐天</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MCM&categoryId=Bag">
+                <img src="/images/brand/MCM.jpg" class="img-thumbnail" />
+                <div class="pic-text">MCM</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MICHAEL%20KORS&categoryId=Bag">
+                <img src="/images/brand/MICHAEL KORS.jpg" class="img-thumbnail" />
+                <div class="pic-text">迈克高仕</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MIU%20MIU&categoryId=Bag">
+                <img src="/images/brand/MIU MIU.jpg" class="img-thumbnail" />
+                <div class="pic-text">缪缪</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MONTBLANC&categoryId=Bag">
+                <img src="/images/brand/MONTBLANC.jpg" class="img-thumbnail" />
+                <div class="pic-text">万宝龙</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MOONY&categoryId=Bag">
+                <img src="/images/brand/MOONY.jpg" class="img-thumbnail" />
+                <div class="pic-text">尤妮佳</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=MOSCHINO&categoryId=Bag">
+                <img src="/images/brand/MOSCHINO.jpg" class="img-thumbnail" />
+                <div class="pic-text">莫斯奇诺</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=NO%20BRAND&categoryId=Bag">
+                <img src="/images/brand/NO BRAND.jpg" class="img-thumbnail" />
+                <div class="pic-text">NO BRAND</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=PAUL%20SMITH&categoryId=Bag">
+                <img src="/images/brand/PAUL SMITH.jpg" class="img-thumbnail" />
+                <div class="pic-text">PAUL SMITH</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=PIQUADRO&categoryId=Bag">
+                <img src="/images/brand/PIQUADRO.jpg" class="img-thumbnail" />
+                <div class="pic-text">皮咖杜</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=PRADA&categoryId=Bag">
+                <img src="/images/brand/PRADA.jpg" class="img-thumbnail" />
+                <div class="pic-text">普拉达</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=REBECCA%20MINKOFF&categoryId=Bag">
+                <img src="/images/brand/REBECCA MINKOFF.jpg" class="img-thumbnail" />
+                <div class="pic-text">瑞贝卡·明可弗</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SAINT%20LAURENT%20PARIS&categoryId=Bag">
+                <img src="/images/brand/SAINT LAURENT PARIS.jpg" class="img-thumbnail" />
+                <div class="pic-text">圣罗兰</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SALVATORE%20FERRAGAMO&categoryId=Bag">
+                <img src="/images/brand/SALVATORE FERRAGAMO.jpg" class="img-thumbnail" />
+                <div class="pic-text">菲拉格慕</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SEKKISEI&categoryId=Bag">
+                <img src="/images/brand/SEKKISEI.jpg" class="img-thumbnail" />
+                <div class="pic-text">雪肌精</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=SOPHIE%20HULME&categoryId=Bag">
+                <img src="/images/brand/SOPHIE HULME.jpg" class="img-thumbnail" />
+                <div class="pic-text">索菲·休姆</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=STELLA%20MCCARTNEY&categoryId=Bag">
+                <img src="/images/brand/STELLA MCCARTNEY.jpg" class="img-thumbnail" />
+                <div class="pic-text">斯特拉·麦卡特尼</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=%E7%BE%8E%E5%A5%BD%E4%BA%BA%E7%94%9F&categoryId=Bag">
+                <img src="/images/brand/美好人生.jpg" class="img-thumbnail" />
+                <div class="pic-text">美好人生</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-4 img-block">
+        <div class="text-center">
+            <a href="/Brand?brandId=%E8%B4%B5%E7%88%B1%E5%A8%98&categoryId=Bag">
+                <img src="/images/brand/贵爱娘.jpg" class="img-thumbnail" />
+                <div class="pic-text">贵爱娘</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="margin-top"></div>

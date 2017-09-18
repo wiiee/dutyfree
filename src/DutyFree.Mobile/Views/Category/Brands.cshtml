@@ -1,0 +1,39 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.Standard
+@using DutyFree.Platform.Constant
+
+@{ 
+    var brands = this.GetService<BrandService>().Get().GroupBy(o => o.CountryId).ToList();
+}
+
+<div class="row">
+    @foreach(var group in brands)
+    {
+        <div class="col-xs-4">
+            <a href="@("#" + group.Key)">@Html.Raw(CountryName.Names[group.Key])</a>
+        </div>
+    }
+</div>
+
+<div class="row">
+    @foreach (var group in brands)
+    {
+        <div class="col-xs-12 text-danger margin-top margin-bottom" id="@group.Key">
+            <span><b>@Html.Raw(CountryName.Names[group.Key])</b></span>
+        </div>
+        
+        @foreach (var item in group)
+        {
+            <div class="col-xs-4 img-block">
+                <div class="text-center">
+                    <a href="~/Brand?brandId=@Html.UrlEncoder.Encode(item.Id)">
+                        <img src="~/images/brand/@Html.Raw(item.Id + ".jpg")" class="img-thumbnail" />
+                    </a>
+                    <div class="pic-text" title="@Html.Raw(item.Name.Get("zh-CN"))">@Html.Raw(item.Name.Get("zh-CN"))</div>
+                </div>
+            </div>
+
+        }
+    }
+    <div class="col-xs-12 pic-bottom"></div>
+</div>

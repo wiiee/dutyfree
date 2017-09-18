@@ -1,0 +1,47 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Entity.Order
+@using DutyFree.Service.Product
+@using System.Globalization
+@using DutyFree.Platform.Util
+
+@model OrderInfo
+
+@{
+    var productService = this.GetService<ProductService>();
+}
+
+<div class="row">
+    @if (Model.ProductInfos.Count == 1)
+    {
+        var item = Model.ProductInfos.First();
+        var product = productService.Get(item.Key);
+        <div class="col-xs-3">
+            <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+            <div class="text-center quantity">@Html.Raw("X" + item.Value.Quantity)</div>
+        </div>
+        <div class="col-xs-6">
+            @Html.Raw(StringUtil.StripHtml(product.Name))
+        </div>
+        <div class="col-xs-3"></div>
+    }
+    else
+    {
+        <div class="col-xs-11">
+            <div class="row">
+                @foreach (var item in Model.ProductInfos.Take(4).ToList())
+                {
+                    var product = productService.Get(item.Key);
+                    <div class="col-xs-3">
+                        <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+                        <div class="text-center quantity">@Html.Raw("X" + item.Value.Quantity)</div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-xs-1 item">
+            <a href="~/Personal/OrderInfo?orderInfoId=@Model.Id">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    }
+</div>

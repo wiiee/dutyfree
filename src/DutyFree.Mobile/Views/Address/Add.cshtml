@@ -1,0 +1,38 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+
+@{
+    ViewData["Title"] = "新建收货地址";
+    ViewData["ng-app"] = "add";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/shared/region.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/address/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _address = {Regions: []};
+    </script>
+    <script type="text/javascript" src="~/js/shared/region.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/address/index.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top"></div>
+
+<div ng-controller="addressCtrl">
+    @Html.Partial("AddressInfo")
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    <div class="save-and-use" ng-click="addAddress()" ng-class="{active:isValid()}">保存并使用</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("Region")

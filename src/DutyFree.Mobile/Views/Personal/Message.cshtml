@@ -1,0 +1,43 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Platform.Enum
+@using DutyFree.Platform.Extension
+@using DutyFree.Entity.ValueType
+
+@{
+    ViewData["Title"] = "消息列表";
+    var preference = this.GetService<PreferenceService>().Get(this.GetUserId());
+    var msgs = preference != null && !preference.Messages.IsEmpty() ? preference.Messages : new Dictionary<long, Message>();
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/personal/index.css" asp-append-version="true" />
+}
+
+<div class="margin-top"></div>
+
+@if (msgs.IsEmpty())
+{
+    @Html.Partial("Message/Empty")
+}
+else
+{
+    @foreach (var item in msgs)
+    {
+        <div class="row">
+            <div class="col-xs-6">
+                <span>@Html.Raw(item.Value.SenderId)</span>
+            </div>
+            <div class="col-xs-6">
+                <span class="pull-right">@Html.Raw(item.Value.Created.ToString())</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <span>@Html.Raw(item.Value.Content)</span>
+            </div>
+        </div>
+
+        <hr />
+    }
+}

@@ -1,0 +1,49 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Entity.Product
+@using DutyFree.Service.Product
+@using DutyFree.Platform.Extension
+@using DutyFree.Platform.Util
+
+@{
+    var product = ViewData["Product"] as Product;
+    var review = this.GetService<ReviewService>().Get(product.Id);
+}
+
+<div class="margin-top"></div>
+
+@if (review == null || review.Comments.IsEmpty())
+{
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="alert alert-warning" role="alert">还没有相关评价!</div>
+        </div>
+    </div>
+}
+else
+{
+    @foreach (var item in review.Comments)
+    {
+        var comment = item.Value.First();
+        <div class="row">
+            <div class="col-xs-6">
+                <span>@Html.Raw(comment.UserId)</span>
+            </div>
+            <div class="col-xs-6">
+                <span class="pull-right">@Html.Raw(comment.Created.ToString())</span>
+            </div>
+        </div>
+        <div class="row row-star">
+            <div class="col-xs-12">
+                @Html.Partial("~/Views/Shared/Star/Star", (int)comment.Star)
+            </div>
+        </div>
+        <div class="row row-content">
+            <div class="col-xs-12">
+                <span>@Html.Raw(comment.Content)</span>
+            </div>
+        </div>
+
+        <hr />
+    }
+}
+

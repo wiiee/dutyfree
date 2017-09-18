@@ -1,0 +1,49 @@
+﻿@using DutyFree.Service.Order
+@using DutyFree.Entity.Order
+@using DutyFree.WebCore.Extension
+
+@{
+    ViewBag.Title = "确认订单";
+    var orderInfos = this.GetService<OrderService>().GetConfirmOrderInfos();
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/product/index.css" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/js/partnerorder/index.js" asp-append-version="true"></script>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>Confirm Orders</h1>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/HeaderMessage.cshtml")
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Money</th>
+                <th>Paid Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in orderInfos)
+            {
+                <tr>
+                    <td><a href="~/Order/Item?itemId=@item.Id">@item.Id</a></td>
+                    <td>@item.TotalPrice</td>
+                    <td>@item.PaidTime</td>
+                    <td><a href="~/Order/Confirm?orderInfoId=@item.Id">Confirm</a></td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>

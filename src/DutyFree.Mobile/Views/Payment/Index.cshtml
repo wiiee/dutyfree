@@ -1,0 +1,74 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Service.Extension
+@using DutyFree.Entity.Order
+@using DutyFree.Platform.Constant
+@using DutyFree.Platform.Extension
+
+@{
+    ViewData["Title"] = "收银台";
+    var orderInfo = ViewData["OrderInfo"] as OrderInfo;
+    var order = ViewData["Order"] as Order;
+    int size = order != null && !order.OrderInfos.IsEmpty() ? order.OrderInfos.Count : 0;
+
+    var recommendId = this.GetService<UserService>().Get(order.Id).RecommendUserId;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/payment/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/js/payment/index.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top"></div>
+
+<div class="row">
+    <div class="col-xs-4">订单金额</div>
+    <div class="col-xs-8"><span class="pull-right price">@(UiSymbol.RMB + orderInfo.TotalPrice)</span></div>
+</div>
+<hr />
+
+@if (size == 1)
+{
+    <div class="row">
+        <div class="col-xs-6 recommend-person-text">推荐人(可选)</div>
+        <div class="col-xs-6"><input type="text" class="form-control" value="@Html.Raw(recommendId)"/></div>
+        <div class="col-xs-12"><span class="pull-right"><small class="recommend-text">你的推荐人将获得你购物5%金额的奖励。</small></span></div>
+    </div>
+    <hr />
+}
+@*else if (size == 2)
+{
+    <div class="row">
+        <div class="col-xs-6 recommend-person-text">推荐人(可选)</div>
+        <div class="col-xs-6"><input type="text" class="form-control" value="@Html.Raw(recommendId)" /></div>
+        <div class="col-xs-12"><span class="pull-right"><small class="recommend-text">你的推荐人将获得你购物1%金额的奖励。</small></span></div>
+    </div>
+    <hr />
+}*@
+
+
+<h4>微信支付</h4>
+<div class="row">
+    <div class="col-xs-4">
+        <img src="~/images/payment/payment.png" class="img-thumbnail" />
+    </div>
+    <div class="col-xs-8">
+        <span class="text-danger pull-right">支付完成后，请点击如下<b>确认支付</b>按钮，我们将及时检查并更新订单状态。</span>
+    </div>
+</div>
+<hr />
+
+<div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-xs-12">
+                <a href="~/Payment/Confirm?orderInfoId=@orderInfo.Id">
+                    <div class="payment">确认支付</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

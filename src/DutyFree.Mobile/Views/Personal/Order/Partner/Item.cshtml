@@ -1,0 +1,49 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Entity.Order
+@using DutyFree.Service.Product
+@using System.Globalization
+@using DutyFree.Platform.Util
+@using DutyFree.Platform.Constant
+@using DutyFree.Service.Extension
+
+@model PartnerOrder
+
+@{ 
+    var productService = this.GetService<ProductService>();
+}
+
+<div class="well">
+    @foreach (var item in Model.ProductInfos)
+    {
+        var product = productService.Get(item.Key);
+        <div class="row row-interval">
+            <div class="col-xs-4">
+                <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+            </div>
+            <div class="col-xs-8">
+                <div>
+                    <a href="~/Detail?productId=@product.Id">@Html.Raw(StringUtil.StripHtml(product.Name))</a>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">@(UiSymbol.RMB + product.GetPrice())</div>
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <span class="pull-right">@(UiSymbol.QUANTITY + item.Value.Quantity)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <hr />
+
+    <div class="row">
+        <div class="col-xs-4 text-center"><b>Total</b></div>
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-4">@Html.Raw(UiSymbol.RMB + Model.GetPrice())</div>
+                <div class="col-xs-4 col-xs-offset-4">
+                    <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + Model.GetCount())</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

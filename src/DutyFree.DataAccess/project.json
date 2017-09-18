@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "DutyFree.Entity": "1.0.0-*",
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "MongoDB.Driver": "2.4.0-beta1"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "tooling": {
+    "defaultNamespace": "DutyFree.DataAccess"
+  }
+}

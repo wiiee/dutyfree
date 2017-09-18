@@ -1,0 +1,27 @@
+﻿@using DutyFree.WebCore.Extension;
+@using DutyFree.Service.Standard
+
+@{ 
+    var brands = this.GetService<BrandService>().Get();
+}
+
+@*<div class="row">
+    <div class="col-xs-12">
+        <img class="img-thumbnail" src="~/images/ASP-NET-Banners-01.png" />
+    </div>
+</div>*@
+
+<h3>品牌</h3>
+<div class="row margin-top">
+    @foreach (var item in brands)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.Encode(item.Id)">
+                    <img src="~/images/brand/@Html.Raw(item.Id + ".jpg")" class="img-thumbnail"/>
+                </a>
+            </div>
+        </div>
+    }
+    <div class="col-xs-12 pic-bottom"></div>
+</div>

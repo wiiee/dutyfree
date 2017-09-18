@@ -1,0 +1,72 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.Product
+@using DutyFree.Platform.Util
+@using DutyFree.Entity.Product
+
+@{
+    ViewData["Title"] = "添加点评";
+    ViewData["ng-app"] = "review";
+
+    var orderInfoId = ViewData["OrderInfoId"] as string;
+    var productId = ViewData["ProductId"] as string;
+
+    var product = ViewData["Product"] as Product;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/review/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _productId = "@Html.Raw(productId)";
+        var _orderInfoId = "@Html.Raw(orderInfoId)";
+    </script>
+    <script type="text/javascript" src="~/js/review/index.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top"></div>
+
+<div class="row">
+    <div class="col-xs-4">
+        <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+    </div>
+    <div class="col-xs-8">
+        @Html.Raw(StringUtil.StripHtml(product.Name))
+    </div>
+</div>
+
+<div class="margin-top"></div>
+<hr />
+
+<div ng-controller="reviewCtrl" ng-cloak>
+    <h4>商品质量</h4>
+    <div class="row">
+        <div class="col-xs-12">
+            @for (int i = 1; i < 6; i++)
+            {
+                <span ng-click="select(@i)" class="glyphicon glyphicon-star-empty star" ng-if="star < @i"></span>
+                <span ng-click="select(@i)" class="glyphicon glyphicon-star star" ng-if="star >= @i"></span>
+            }
+        </div>
+    </div>
+
+    <h4>商品评价</h4>
+    <div class="row">
+        <div class="col-xs-12">
+            <textarea class="form-control" ng-model="text"></textarea>
+        </div>
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    <div class="add-review" ng-click="addReview()" ng-class="{active:isValid()}">提交点评</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

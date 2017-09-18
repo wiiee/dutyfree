@@ -1,0 +1,85 @@
+﻿@using DutyFree.Platform.Enum
+
+@{
+    ViewBag.Title = "Region";
+    ViewData["ng-app"] = "region";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/lib/bootstrap-gtreetable/dist/bootstrap-gtreetable.min.css" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/bootstrap-gtreetable/dist/bootstrap-gtreetable.min.js"></script>
+    <script type="text/javascript" src="~/js/setting/region.js"></script>
+}
+
+@section breadcrumb{
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Setting</a></li>
+            <li class="active">Region</li>
+        </ol>
+    </div>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>Region</h1>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/HeaderMessage.cshtml")
+
+<div class="row" ng-controller="regionCtrl" ng-cloak>
+    <form method="post" ng-submit="submit()">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Regions <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ng-click="addItem()"></span></h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-2">Id</div>
+                                    <div class="col-md-2">Name</div>
+                                    <div class="col-md-2">ParentId</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in items">
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <input class="form-control" ng-model="item.Id" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control" ng-model="item.Name.Default" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control" ng-model="item.ParentId" data-validation="required" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="glyphicon glyphicon-remove" ng-if="items.length > 0" ng-click="removeItem(item.Index)"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="reset" class="btn btn-default left-margin" ng-click="reset($event)">Reset</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

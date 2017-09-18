@@ -1,0 +1,20 @@
+﻿@using DutyFree.Service.Standard
+@using DutyFree.Entity.Standard
+
+@model List<Brand>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-4 img-block">
+            <div class="text-center">
+                <a href="~/Brand?brandId=@Html.UrlEncoder.Encode(item.Id)">
+                    <img src="~/images/brand/@(item.Id + ".jpg")" class="img-thumbnail" />
+                </a>
+                <div class="pic-text" title="@Html.Raw(item.Name.Get("zh-CN"))">@Html.Raw(item.Name.Get("zh-CN"))</div>
+            </div>
+        </div>
+
+    }
+    <div class="col-xs-12 pic-bottom"></div>
+</div>

@@ -1,0 +1,46 @@
+﻿@using DutyFree.Platform.Enum
+
+@{
+    ViewBag.Title = "Airport";
+    ViewData["ng-app"] = "airport";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/lib/bootstrap-gtreetable/dist/bootstrap-gtreetable.min.css" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/lib/bootstrap-gtreetable/dist/bootstrap-gtreetable.min.js"></script>
+    <script type="text/javascript" src="~/js/setting/airport.js"></script>
+}
+
+@section breadcrumb{
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Setting</a></li>
+            <li class="active">Airport</li>
+        </ol>
+    </div>
+}
+
+<div class="row">
+    <div class="page-header">
+        <h1>Airport</h1>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/HeaderMessage.cshtml")
+
+<div class="row">
+    <div class="container" ng-controller="airportCtrl">
+        <form>
+            <table id="region" class="gtreetable table">
+                <thead>
+                    <tr>
+                        <th width="100%">Airport</th>
+                    </tr>
+                </thead>
+            </table>
+        </form>
+    </div>
+</div>

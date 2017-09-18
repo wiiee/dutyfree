@@ -1,0 +1,205 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.Product
+@using DutyFree.Service.User
+@using DutyFree.Service.Order
+@using DutyFree.Service.Extension
+@using DutyFree.Entity.Product
+@using DutyFree.Platform.Enum
+@using System.Linq
+@using System.Globalization
+@using DutyFree.Platform.Util
+@using DutyFree.Platform.Extension
+@using DutyFree.Platform.Constant
+
+@{
+    ViewData["Title"] = "待购列表";
+    ViewData["ng-app"] = "cart";
+    ViewData["IsPartner"] = true;
+    var productService = this.GetService<ProductService>();
+    var partnerOrderService = this.GetService<PartnerOrderService>();
+    var partnerOrders = partnerOrderService.GetPartnerOrderInfos();
+    var pendingProducts = new Dictionary<string, int>();
+    Array currencies = Enum.GetValues(typeof(CurrencySymbol));
+
+    double total = 0;
+    double itemTotal = 0;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/cart/provider.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/js/cart/provider.js" asp-append-version="true"></script>
+}
+
+<div class="row margin-top" ng-controller="providerCtrl"></div>
+
+@if (partnerOrders.IsEmpty())
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-warning" role="alert">你暂时没有待购列表!</div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="well">
+        <div class="row">
+            <div class="col-xs-4">
+                <a href="~/images/staff/gutianle.jpg"><img src="~/images/staff/gutianle.jpg" class="img-thumbnail" /></a>
+            </div>
+            <div class="col-xs-8">
+                工作人员：***<br />
+                电话号码：123456789
+            </div>
+        </div>
+        <hr />
+        @foreach (var item in pendingProducts)
+        {
+            var product = productService.Get(item.Key);
+            total += product.Price * item.Value;
+            <div class="row row-interval">
+                <div class="col-xs-4">
+                    <a href="~/Detail?productId=@item.Key"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+                </div>
+                <div class="col-xs-8">
+                    <div>
+                        <a href="~/Detail?productId=@item.Key">@Html.Raw(StringUtil.StripHtml(product.Name))</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">@Html.Raw(UiSymbol.RMB + product.Price)</div>
+                        <div class="col-xs-4 col-xs-offset-4">
+                            <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + item.Value)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <hr />
+
+        <div class="row">
+            <div class="col-xs-4 text-center"><b>合计</b></div>
+            <div class="col-xs-8">
+                <div class="row">
+                    <div class="col-xs-4">@Html.Raw(UiSymbol.RMB + total)</div>
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + pendingProducts.Sum(o => o.Value))</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @foreach (var partnerOrder in partnerOrders)
+    {
+        itemTotal = 0;
+        <div class="well">
+            @foreach (var item in partnerOrder.PartnerProductInfos)
+            {
+                var product = productService.Get(item.Key);
+                itemTotal += product.Price * item.Value.Quantity;
+                <div class="row row-interval">
+                    <div class="col-xs-4">
+                        <a href="~/Detail?productId=@product.Id"><img class="img-thumbnail" src="~/@(ImgUtil.GetImgUrl(product.Logo))" alt="Logo"></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <div>
+                            <a href="~/Detail?productId=@product.Id">@Html.Raw(StringUtil.StripHtml(product.Name))</a>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">@(UiSymbol.RMB + product.GetPrice())</div>
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <span class="pull-right">@(UiSymbol.QUANTITY + item.Value.Quantity)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <hr />
+
+            <div class="row">
+                <div class="col-xs-4 text-center"><b>合计</b></div>
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="col-xs-4">@Html.Raw(UiSymbol.RMB + itemTotal)</div>
+                        <div class="col-xs-4 col-xs-offset-4">
+                            <span class="pull-right">@Html.Raw(UiSymbol.QUANTITY + partnerOrder.GetCount())</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-interval">
+                <div class="col-xs-12"><span class="earning-text"><b>@Html.Raw("你可以大致赚取" + UiSymbol.RMB + partnerOrder.GetEarning(itemTotal))</b></span></div>
+            </div>
+            <div class="row row-interval">
+                <div class="col-xs-12 row-interval">
+                    <a class="btn btn-info btn-block" href="~/Cart/CancelOrder?partnerOrderId=@Html.UrlEncoder.Encode(partnerOrder.Id)">取消购买</a>
+                </div>
+            </div>
+
+            <hr />
+
+            @if (partnerOrder.Status == Status.Pending)
+            {
+                <div class="row row-interval">
+                    <div class="col-xs-12">
+                        <b>如果你已经在机场购买好了，请输入价格和货币，方便我们结算。</b>
+                    </div>
+                </div>
+
+                <div class="row row-interval">
+                    <div class="col-xs-2 row-interval">
+                        <div class="text">价格</div>
+                    </div>
+                    <div class="col-xs-4 row-interval">
+                        <input class="form-control" ng-model="price" name="price" />
+                    </div>
+                    <div class="col-xs-2 row-interval">
+                        <div class="text">货币</div>
+                    </div>
+                    <div class="col-xs-4 row-interval">
+                        <select class="form-control" ng-model="symbol" name="currency">
+                            @foreach (var item in currencies)
+                    {
+                                <option value="@item">@Enum.GetName(typeof(CurrencySymbol), item)</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-xs-12 row-interval">
+                        <a class="btn btn-info btn-block" ng-show="price && symbol" ng-href="/Cart/BuyOrder?partnerOrderId=@Html.UrlEncoder.Encode(partnerOrder.Id)&price={{price | escape}}&symbol={{currency | escape}}">确认购买</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row row-interval">
+                    <div class="col-xs-2 row-interval">
+                        <div>价格</div>
+                    </div>
+                    <div class="col-xs-4 row-interval">
+                        @partnerOrder.Price
+                    </div>
+                    <div class="col-xs-2 row-interval">
+                        <div>货币</div>
+                    </div>
+                    <div class="col-xs-4 row-interval">
+                        @partnerOrder.Symbol
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="row row-interval">
+                    <div class="col-xs-12">
+                        <b>已经买好了，等待下飞机接收。</b>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+

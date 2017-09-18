@@ -1,0 +1,72 @@
+﻿.price {
+    padding-top: 8px;
+}
+
+.delete {
+    padding-top: 8px;
+    color: purple;
+}
+
+.single-checkbox {
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+.all-checkbox {
+    margin-left: 35px;
+}
+
+.total-price {
+    margin-top: 10px;
+}
+
+.check {
+    padding-top: 10px;
+    background-color: #663399;
+    color: white;
+    min-height: 40px;
+}
+
+#confirmOrder {
+    position: fixed;
+    bottom: 50px;
+    margin-bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background-color: #f8f8f8;
+    border-width: 1px 0 0;
+    border-style: solid;
+    border-color: #e7e7e7;
+}
+
+#footer {
+    border: 0;
+}
+
+.cart-item {
+    padding-left: 0;
+}
+
+.price-line {
+    margin-top: 5px;
+}
+
+.idle {
+    background-color: darkgray;
+}
+
+.check a {
+    color: white;
+}
+
+.tooltip-inner {
+    margin-top: -75px;
+    margin-left: -85px;
+    font-size: 16px;
+}
+
+.form-control {
+    padding-left: 0px;
+    padding-right: 2px;
+}

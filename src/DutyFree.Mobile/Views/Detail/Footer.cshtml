@@ -1,0 +1,38 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.WebCore.Constant
+@using DutyFree.Service.User
+@using DutyFree.Platform.Enum
+@using Microsoft.AspNetCore.Http;
+
+@{ 
+    var userType = (UserType)Context.Session.GetInt32(SessionKey.USER_TYPE);
+}
+
+@if (userType == UserType.Partner)
+{
+    @Html.Partial("~/Views/Shared/Partner/Footer.cshtml")
+}
+else
+{
+    <div class="navbar navbar-default navbar-fixed-bottom" ng-controller="footerCtrl">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-xs-3 footer" ng-click="go('Category')" ng-class="{current:currentTab === 0}">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <div class="footer-text">首页</div>
+                </div>
+                <div class="col-xs-3 footer" ng-click="go('Cart')" ng-class="{current:currentTab === 2}">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    <div class="footer-text">购物车({{quantity}})</div>
+                </div>
+                <div class="col-xs-3 footer" ng-click="go('Personal')" ng-class="{current:currentTab === 3}">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <div class="footer-text">个人中心</div>
+                </div>
+                <div class="col-xs-3 add-cart" ng-controller="detailCtrl" ng-click="addToCart()">
+                    <span>加入购物车</span>
+                </div>
+            </div>
+        </div>
+    </div>
+}

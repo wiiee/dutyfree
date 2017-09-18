@@ -1,0 +1,54 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Entity.Product
+@using DutyFree.Platform.Util
+@using DutyFree.Entity.Standard
+
+@{
+    var brand = ViewData["Brand"] as Brand;
+    ViewData["Title"] = brand.Name.Get("zh-CN");
+    ViewData["ng-app"] = "brand";
+}
+
+@section css {
+    <script type="text/javascript">
+        var _brandId = "@Html.Raw(brand.Id)";
+    </script>
+    <link rel="stylesheet" href="~/css/brand/index.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var _brandId = "@Html.Raw(brand.Id)";
+    </script>
+    <script type="text/javascript" src="~/js/shared/page.js"></script>
+    <script type="text/javascript" src="~/js/brand/index.js" asp-append-version="true"></script>
+}
+
+<div class="margin-top"></div>
+
+<div ng-controller="brandCtrl" ng-cloak>
+    <div class="row" id="products">
+    </div>
+
+    <div class="margin-top"></div>
+
+    <div class="row" ng-if="isLoading()">
+        <div class="col-xs-12 text-center">
+            <img src="~/images/Loading/loading.gif" /> Loading...
+        </div>
+    </div>
+
+    <div class="to-top" ng-if="!isTop">
+        <a href="#"><span class="glyphicon glyphicon-arrow-up"></span></a>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cartMessage" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <div class="ok-circle"><span class="glyphicon glyphicon-ok-circle"></span></div>
+            <div class="add-cart-text">加入购物车成功</div>
+        </div>
+    </div>
+</div>

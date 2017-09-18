@@ -1,0 +1,17 @@
+﻿.region-name {
+    margin-top: 8px;
+}
+
+.selectedRegion {
+    color: red;
+}
+
+.modal-dialog {
+    position: fixed;
+    bottom: 0;
+    width: 96%;
+}
+
+.modal-body {
+    min-height: 410px;
+}

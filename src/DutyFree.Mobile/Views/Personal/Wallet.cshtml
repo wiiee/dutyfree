@@ -1,0 +1,56 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.User
+@using DutyFree.Platform.Enum
+@using DutyFree.Platform.Extension
+@using DutyFree.Entity.ValueType
+
+@{
+    ViewData["Title"] = "钱包";
+    var preference = this.GetService<PreferenceService>().Get(this.GetUserId());
+    double total = 0;
+
+    var wallet = preference != null ? preference.Wallet : null;
+
+    if(preference != null && preference.Wallet != null)
+    {
+        total = preference.Wallet.GetTotal();
+    }
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/personal/index.css" asp-append-version="true" />
+}
+
+<div class="margin-top"></div>
+
+@if (wallet == null || wallet.InItems.IsEmpty())
+{
+    @Html.Partial("Wallet/Empty")
+}
+else
+{
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>金额</th>
+                    <th>订单Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in wallet.InItems)
+                {
+                    <tr>
+                        <td>@Html.Raw(item.RewardType)</td>
+                        <td>@Html.Raw(item.Number)</td>
+                        <td>@Html.Raw(item.OrderInfoId)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<hr />
+Total: @total

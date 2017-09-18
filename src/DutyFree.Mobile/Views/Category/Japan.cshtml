@@ -1,0 +1,8 @@
+﻿@using DutyFree.WebCore.Extension
+@using DutyFree.Service.Standard
+
+@{
+    var brands = this.GetService<BrandService>().Get(o => o.CountryId == "Japan").ToList();
+}
+
+@Html.Partial("Brand", brands)
