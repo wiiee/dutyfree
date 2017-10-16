@@ -1,0 +1,19 @@
+page-home-partner {
+    .earning-text {
+        color: color($colors, danger);
+    }
+    
+    .summary {
+        padding: 0 5px;
+        color: #8b008b;
+    }
+
+    .price {
+        padding-left: 10px;
+    }
+
+    .error {
+        color: color($colors, danger);
+        font-size: 12px;
+    }
+}

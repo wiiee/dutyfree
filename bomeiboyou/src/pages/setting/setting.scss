@@ -1,0 +1,15 @@
+page-setting {
+    button.logOff {
+        min-height: 44px;
+        position: fixed;
+        margin-bottom: 10px;
+        left: 16px;
+        right: 16px;
+        bottom: 0;
+        width: calc(100% - 32px);
+    }
+
+    .scroll-content {
+        margin-bottom: 60px !important;
+    }       
+}

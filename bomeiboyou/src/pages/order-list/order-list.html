@@ -1,0 +1,41 @@
+<!--
+  Generated template for the OrderList page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center class="title">{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="getItems().length === 0">
+    <ion-card-header class="empty" text-center>
+      没有相关订单
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngFor="let orderInfo of getItems()">
+    <ion-card-content (press)="removeOrderInfo(orderInfo.id)">
+      <div text-right>
+        共{{orderInfo.getCount()}}件商品 总额: <ion-icon name="logo-yen"></ion-icon>{{orderInfo.totalPrice}}
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-25 *ngFor="let item of take(orderInfo.items, 3)">
+            <img [src]="getImgUrl(item.logo)" [alt]="item.name" class="img-thumbnail" (click)="goDetailPage(item.productId)">
+            <div text-center class="quantity">×{{item.quantity}}</div>
+          </ion-col>
+          <ion-col text-right center (click)="goProductListPage(orderInfo.items)">
+            <ion-icon name="arrow-forward" class="go"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <button ion-button block *ngIf="status === 0" (click)="goPaymentPage(orderInfo.id)">去付款</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

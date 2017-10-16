@@ -1,0 +1,23 @@
+page-address-list {
+    .add {
+        position: fixed;
+        z-index: 999;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        min-height: 50px;
+        margin: 0 0;
+    }
+
+    .icon-checkmark {
+        color: #8b008b;
+    }
+
+    .icon-forward {
+        color: color($colors, primary);
+    }
+
+    .scroll-content {
+        margin-bottom: 60px !important;
+    }
+}

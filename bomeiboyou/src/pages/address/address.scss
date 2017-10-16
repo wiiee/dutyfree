@@ -1,0 +1,23 @@
+page-address {
+    .save {
+        position: fixed;
+        z-index: 999;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        min-height: 50px;
+        margin: 0 0;
+    }
+
+    li {
+        color: color($colors, danger);
+    }
+
+    ion-icon {
+        color: #387ef5;
+    }
+
+    .scroll-content {
+        margin-bottom: 60px !important;
+    }    
+}

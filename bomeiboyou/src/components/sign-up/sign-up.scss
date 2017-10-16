@@ -1,0 +1,9 @@
+sign-up {
+    li, .error {
+        color: color($colors, danger);
+    }
+
+     button.signUp {
+        min-height: 44px;
+    }   
+}

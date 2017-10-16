@@ -1,0 +1,12 @@
+page-qr {
+    .qr-center {
+        clear: both;
+        display: block;
+        margin: auto;
+        width: 200px;
+    }
+    
+    li {
+        color: color($colors, danger);
+    }
+}

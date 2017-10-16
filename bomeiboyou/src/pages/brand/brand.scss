@@ -1,0 +1,43 @@
+page-brand {
+    .items{
+        .price {
+            color: color($colors, danger);
+            padding-left: 5px;
+        }
+
+        ion-item.item {
+            padding-left: 0px;
+            font-size: 12px;
+            min-height: 0;
+        }
+
+        ion-icon[item-right] {
+            margin: 0 0;
+        }
+
+        .item-inner > ion-icon {
+            min-height: 0;
+        }
+
+        ion-col {
+            padding: 0 0;
+        }
+
+        ion-card {
+            margin: 2px 2px;
+            width: calc(100% - 4px);
+        }
+
+        ion-card-content {
+            padding: 5px 5px;
+        }
+
+        ion-label {
+            margin: 5px 5px;
+        }
+    }
+
+    .error{
+        color: color($colors, danger);
+    }
+}

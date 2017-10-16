@@ -1,0 +1,125 @@
+<ion-header>
+	<ion-navbar>
+		<div *ngIf="context.isLogIn">
+			<ion-grid class="header">
+				<ion-row center>
+					<ion-col width-50>
+						<ion-item no-lines class="person">
+							<ion-avatar item-left>
+								<img src="assets/images/avatar/boy-3.png">
+							</ion-avatar>
+							{{context.user.id}}
+						</ion-item>
+					</ion-col>
+					<ion-col width-50 text-right>
+						<div>
+							<span (click)="goSettingPage()"><ion-icon name="settings"></ion-icon></span>
+							<span padding-left (click)="goMessagePage()"><ion-icon name="chatboxes"></ion-icon>{{messages ? "(" + messages.length + ")" : ""}}</span>
+							<span padding-left padding-right (click)="goAccountPage()"><ion-icon name="person"></ion-icon></span>
+						</div>
+						<!--<div margin-top center (click)="goAccountPage()">
+							账户管理 <ion-icon name="arrow-forward"></ion-icon>
+						</div>-->
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>		
+		<ion-title text-center *ngIf="!context.isLogIn">
+			<div class="auth">
+				<ion-segment [ngModel]="titleIndex.toString()">
+					<ion-segment-button *ngFor="let item of titles; let i = index" (ionSelect)=selectTitle(i) value="{{i}}">
+						{{item}}
+					</ion-segment-button>
+				</ion-segment>
+			</div>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<div *ngIf="!context.isLogIn" padding>
+		<div class="log-in" [hidden]="titleIndex !== 0">
+			<log-in></log-in>
+		</div>
+		<div class="sign-up" [hidden]="titleIndex !== 1">
+			<sign-up></sign-up>
+		</div>
+	</div>
+
+	<div *ngIf="context.isLogIn">
+		<ion-item no-lines>
+			<span item-right><button ion-button small (click)="goQrPage()">我的二维码</button></span>
+		</ion-item>
+
+		<ion-card>
+			<ion-card-content>
+				<ion-grid>
+					<ion-row>
+						<ion-col width-33 (click)="goWalletPage()">我的钱包
+							<ion-badge>{{wallet ? wallet.getTotal() : 0}}</ion-badge>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</ion-card>
+
+		<ion-card>
+			<ion-card-content>
+				<ion-grid>
+					<ion-row>
+						<ion-col width-33 (click)="goOrderListPage(0)">
+							<div>
+								<ion-icon name="card"></ion-icon>
+							</div>
+							<div>
+								待付款
+								<ion-badge>{{getOrderCount(0)}}</ion-badge>
+							</div>
+						</ion-col>
+						<ion-col width-33 text-center (click)="goOrderListPage(1)">
+							<div>
+								<ion-icon name="car"></ion-icon>
+							</div>
+							<div>
+								待收货
+								<ion-badge>{{getOrderCount(1)}}</ion-badge>
+							</div>
+						</ion-col>
+						<ion-col width-33 text-right (click)="goOrderListPage(3)">
+							<div>
+								<ion-icon name="done-all"></ion-icon>
+							</div>
+							<div>
+								已完成
+								<ion-badge>{{getOrderCount(3)}}</ion-badge>
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</ion-card>
+
+		<ion-card>
+			<ion-card-content>
+				<ion-grid>
+					<ion-row>
+						<ion-col width-33 (click)="goCommentListPage(false)">待评价
+							<ion-badge>{{getPendingReviewCount()}}</ion-badge>
+						</ion-col>
+						<ion-col width-33></ion-col>
+						<ion-col width-33 text-right (click)="goCommentListPage(true)">已评价
+							<ion-badge>{{getDoneReviewCount()}}</ion-badge>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card-content>
+		</ion-card>
+
+		<ion-item no-lines>
+			<ion-range min="0" max="1" step="1" snaps="true" color="danger" [(ngModel)]="context.user.userType" (ionChange)="selectUserType()">
+				<ion-icon name="person" range-left color="primary"></ion-icon>
+				<ion-icon name="car" range-right color="primary"></ion-icon>
+			</ion-range>
+		</ion-item>
+	</div>
+</ion-content>

@@ -1,0 +1,76 @@
+<!--
+  Generated template for the DetailPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar>
+		<ion-segment [ngModel]="tab.toString()" text-center>
+			<ion-segment-button (ionSelect)="tab = 0" value="0">
+				商品
+			</ion-segment-button>
+			<ion-segment-button (ionSelect)="tab = 1" value="1">
+				详情
+			</ion-segment-button>
+			<ion-segment-button (ionSelect)="tab = 2" value="2">
+				评价
+			</ion-segment-button>
+		</ion-segment>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<button ion-button type="button" color="danger" (click)="addCart()" class="add-cart" *ngIf="product">加入购物车</button>
+
+	<div [hidden]="tab !== 0" *ngIf="product">
+		<ion-item>
+			<ion-slides [options]="options">
+				<ion-slide *ngFor="let img of product.imgIds">
+					<img [src]="getImgUrl(img)" [alt]="product.name">
+				</ion-slide>
+			</ion-slides>
+		</ion-item>
+
+		<div>
+			<ion-item no-lines text-wrap>
+				<b>{{product.name}}</b>
+			</ion-item>
+			<ion-item class="price" no-lines>
+				<ion-icon name="logo-yen"></ion-icon> <b>{{product.price}}</b>
+				<del><b>{{product.marketPrice}}</b></del>
+			</ion-item>
+		</div>
+	</div>
+
+	<div [hidden]="tab !== 1" *ngIf="product">
+		<ion-card *ngFor="let img of product.descriptionImgIds" class="description-img">
+			<img [src]="getImgUrl(img)" [alt]="product.name">
+		</ion-card>
+	</div>
+
+	<div [hidden]="tab !== 2">
+		<div *ngIf="!review">
+			<ion-card>
+				<ion-card-header>
+					还没有相关评论
+				</ion-card-header>
+			</ion-card>
+		</div>
+		<div *ngIf="review">
+			<ion-list>
+				<ion-item *ngFor="let item of review.comments" text-wrap>
+					<ion-avatar item-left>
+						<img src="assets/images/avatar/boy-3.png">
+						<div class="phone" text-center>{{item[0].userId}}</div>
+					</ion-avatar>
+					<p>
+						<ion-icon *ngFor="let name of getStarNames(item[0].star)" [name]="name" class="star"></ion-icon>
+						<span class="time">{{item[0].created.toLocaleString('en-US')}}</span>
+					</p>
+					<p>{{item[0].content}}</p>
+				</ion-item>
+			</ion-list>
+		</div>
+	</div>
+</ion-content>

@@ -1,0 +1,13 @@
+page-comment-list {
+    .comment {
+        color: color($colors, primary);
+    }
+
+    .star {
+        color: color($colors, primary);
+    }
+
+    .time {
+        float: right;
+    }
+}

@@ -1,0 +1,38 @@
+page-confirm-order {
+    .text {
+        color: #387ef5;
+    }
+
+    .quantity {
+        color: #8b008b;
+    }
+
+    .placeOrder {
+        position: fixed;
+        z-index: 999;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #f8f8f8;
+        border-width: 1px 0 0;
+        border-style: solid;
+        border-color: #e7e7e7;
+    }
+
+    ion-grid.placeOrder {
+        padding: 0 0;
+    }
+
+    .placeOrder ion-col {
+        padding: 0 0;
+    }
+
+    .placeOrder .button {
+        margin: 0 0;
+        min-height: 50px;
+    }
+
+    .scroll-content {
+        margin-bottom: 60px !important;
+    }    
+}

@@ -1,0 +1,35 @@
+page-home{
+    .logo{
+        padding: 4px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    #container {
+        display: flex;
+        overflow: hidden;
+        height: 100vh;
+        // margin-top: -68px;
+        // padding-top: 68px;
+        // margin-bottom: -68px;
+        // padding-bottom: 68px;
+        position: relative;
+        backface-visibility: hidden;
+        will-change: overflow;
+    }
+
+    #left {
+        overflow: auto;
+        height: auto;
+        -webkit-overflow-scrolling: auto;
+        -ms-overflow-style: none;
+    }
+
+    #right {
+        overflow: auto;
+        height: auto;
+        -webkit-overflow-scrolling: auto;
+        -ms-overflow-style: none;
+    }
+}

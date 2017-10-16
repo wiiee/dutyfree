@@ -1,0 +1,38 @@
+<!--
+  Generated template for the LogIn component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>手机号码</ion-label>
+      <ion-input type="text" formControlName="id"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.id.length > 0" class="alert alert-danger">
+      <ul>
+        <li *ngFor="let error of formErrors.id">{{error}}</li>
+      </ul>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>密码</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.password.length > 0" class="alert alert-danger">
+      <ul>
+        <li *ngFor="let error of formErrors.password">{{error}}</li>
+      </ul>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="errorMsg" class="error" text-wrap no-lines>
+    {{errorMsg}}
+  </ion-item>
+
+  <button ion-button type="submit" block [disabled]="!form.valid" class="logIn">{{isProcessing ? "登陆中..." : "登陆"}}</button>
+
+  <!--<button outline item-right>找回密码</button>-->
+</form>

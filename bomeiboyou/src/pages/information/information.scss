@@ -1,0 +1,24 @@
+page-information {
+    ion-icon {
+        color: color($colors, primary);
+    }
+
+    .segment-button {
+        font-weight: bolder;
+    }
+
+    .header {
+        background-color: color($colors, danger);
+        color: #fff;
+    }
+
+    .header ion-icon {
+        color: #fff;
+        font-size: 24px;
+    }
+
+    .person {
+        color: #fff;
+        background-color: color($colors, danger);
+    }
+}

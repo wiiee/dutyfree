@@ -1,0 +1,41 @@
+page-detail {
+    .price {
+        color: color($colors, danger);
+    }
+
+    .description-img {
+        margin: 0 10px;
+    }
+
+    ion-segment {
+        padding-right: 70px;
+    }
+
+    ion-segment-button {
+        font-weight: bolder;
+    }
+
+    .scroll-content {
+        margin-bottom: 60px !important;
+    } 
+
+    .add-cart {
+        position: fixed;
+        right: 0;
+        margin-top: -12px;
+        z-index: 2;
+        opacity: 0.8;
+    }
+
+    .star {
+        color: color($colors, primary);
+    }
+
+    .time {
+        float: right;
+    }
+
+    .phone {
+        font-size: 6px;
+    }
+}

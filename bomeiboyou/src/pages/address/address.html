@@ -1,0 +1,60 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title text-center class="title">
+			{{title}}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<form [formGroup]="form">
+		<ion-list>
+			<ion-item>
+				<ion-label floating>收件人</ion-label>
+				<ion-input type="text" formControlName="name"></ion-input>
+			</ion-item>
+			<ion-item *ngIf="formErrors.name.length > 0" class="alert alert-danger">
+				<ul>
+					<li *ngFor="let error of formErrors.name">{{error}}</li>
+				</ul>
+			</ion-item>
+
+			<ion-item>
+				<ion-label floating>手机号码</ion-label>
+				<ion-input type="text" formControlName="phone"></ion-input>
+			</ion-item>
+			<ion-item *ngIf="formErrors.phone.length > 0" class="alert alert-danger">
+				<ul>
+					<li *ngFor="let error of formErrors.phone">{{error}}</li>
+				</ul>
+			</ion-item>
+
+			<ion-item>
+				<ion-label fixed>地区</ion-label>
+				<ion-input type="text" [value]="address.getRegionText()" readonly></ion-input>
+				<ion-icon name="arrow-forward" item-right (click)="selectRegion()"></ion-icon>
+			</ion-item>
+			<ion-item *ngIf="(!address.regions || address.regions.length === 0) && form.valid" class="alert alert-danger">
+				<ul>
+					<li>请选择地区</li>
+				</ul>
+			</ion-item>
+
+			<ion-item>
+				<ion-label floating>详细地址</ion-label>
+				<ion-input type="text" formControlName="text"></ion-input>
+			</ion-item>
+			<ion-item *ngIf="formErrors.text.length > 0" class="alert alert-danger">
+				<ul>
+					<li *ngFor="let error of formErrors.text">{{error}}</li>
+				</ul>
+			</ion-item>
+		</ion-list>
+
+		<ion-item *ngIf="errorMsg" class="error" text-wrap no-lines>
+			{{errorMsg}}
+		</ion-item>
+	</form>
+</ion-content>
+
+<button ion-button type="button" color="danger" block [disabled]="!form.valid || address.regions.length === 0" class="save" (click)="onSubmit()">{{isProcessing ? "正在处理..." : "保存"}}</button>

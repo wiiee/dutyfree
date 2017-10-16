@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar (input)="searchItems($event)" placeholder=""></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <ion-grid>
+    <ion-row id="container" [style.margin]="getMargin()" [style.padding]="getPadding()">
+      <ion-col width-25 id="left">
+        <button ion-button [outline]="item[0] !== current" block *ngFor="let item of items" (click)="itemSelected(item)">
+          {{item[1]}}
+        </button>
+      </ion-col>
+      <ion-col width-75 id="right">
+        <ion-row *ngFor="let group of groups">
+          <ion-col width-33 *ngFor="let brand of group">
+            <ion-thumbnail (click)="goBrand(brand)">
+              <img [src]="getImgUrl(brand.logo)" class="logo">
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

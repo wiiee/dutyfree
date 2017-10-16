@@ -1,0 +1,105 @@
+<!--
+  Generated template for the CartPartner page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar>
+		<ion-title text-center>
+			<div *ngIf="context.isLogIn">购物车</div>
+			<div *ngIf="!context.isLogIn" class="auth">
+				<ion-segment [ngModel]="titleIndex.toString()">
+					<ion-segment-button *ngFor="let item of titles; let i = index" (ionSelect)=selectTitle(i) value="{{i}}">
+						{{item}}
+					</ion-segment-button>
+				</ion-segment>
+			</div>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<div *ngIf="!context.isLogIn" padding>
+		<div class="log-in" [hidden]="titleIndex !== 0">
+			<log-in></log-in>
+		</div>
+		<div class="sign-up" [hidden]="titleIndex !== 1">
+			<sign-up></sign-up>
+		</div>
+	</div>
+
+	<div *ngIf="context.isLogIn && isReady">
+		<ion-item no-lines *ngIf="items.length === 0">
+			你的购物车是空的
+		</ion-item>
+
+		<ion-grid *ngIf="items.length > 0">		
+			<ion-row *ngIf="imgs.length > 0 && status !== 2">
+				<ion-col text-center *ngFor="let img of imgs">
+					{{img}}
+					<img [src]="img" class="img-thumbnail">
+					<div><ion-icon name="close-circle" color="danger" (tap)="removePhoto(item)" class="remove-photo"></ion-icon></div>
+				</ion-col>
+			</ion-row>		
+			<ion-row class="summary">
+				<ion-col width-33>合计</ion-col>
+				<ion-col class="price">
+					<ion-icon name="logo-yen"></ion-icon>{{getPrice()}}
+				</ion-col>
+				<ion-col text-right>×{{getCount()}}</ion-col>
+			</ion-row>
+			<ion-row class="earning-text">
+				<ion-col>你可以大致赚取
+					<ion-icon name="logo-yen"></ion-icon>{{ceil(getPrice() * 0.1)}}
+					<hr>
+				</ion-col>
+			</ion-row>
+			<ion-row *ngIf="status !== 2">
+				<ion-col>
+					<div>当您购买完成后，请确认购买，并上传发票，将会减少我们的确认时间并方便及时与您结算。</div>
+					<div><button ion-button block color="danger" icon-left (tap)="takePhoto()"><ion-icon name="images"></ion-icon>{{imgs.length === 0 ? "拍摄发票" : "继续拍摄"}}</button></div>
+					<div *ngIf="imgs.length > 0" margin-top><button ion-button block color="danger" icon-left (tap)="uploadPhoto()"><ion-icon name="cloud-upload"></ion-icon>确认上传</button></div>
+				</ion-col>
+			</ion-row>
+			<ion-row *ngIf="status === 2">
+				<ion-col>
+					<ion-item text-wrap no-lines>
+						<ion-thumbnail item-left>
+							<img src="assets/images/avatar/boy-4.png" class="img-thumbnail">
+						</ion-thumbnail>
+						<div>工作人员：古天乐</div>
+						<div>电话：0123456789</div>
+						<div>我们的工作人员已经在机场等候您</div>						
+					</ion-item>
+					<hr>
+				</ion-col>
+			</ion-row>
+			<ion-row *ngFor="let item of items">
+				<ion-col width-33 (click)="goDetailPage(item.productId)">
+					<img [src]="getImgUrl(item.logo)" [alt]="item.name" class="img-thumbnail">
+				</ion-col>
+				<ion-col (press)="removeCart(item.productId, 0)">
+					<ion-row>
+						<ion-col>{{item.name}}</ion-col>
+					</ion-row>
+					<ion-row center>
+						<ion-col width-25>{{item.price}}</ion-col>
+						<ion-col width-75 class="op" text-right *ngIf="status === 2">
+							×{{item.quantity}}
+						</ion-col>						
+						<ion-col width-75 class="op" text-right *ngIf="status !== 2">
+							<button ion-button small class="button-op" color="primary" [disabled]="item.quantity === 1" (click)="removeCart(item.productId, 1)">
+								<ion-icon name="remove"></ion-icon>
+							</button>
+							<input class="quantity" [(ngModel)]="item.quantity">
+							<button ion-button small class="button-op" color="primary" [disabled]="item.quantity >= getMaxNumbers(item.productId)" (click)="addCart(item, 1)">
+								<ion-icon name="add"></ion-icon>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+</ion-content>

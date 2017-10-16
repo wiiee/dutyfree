@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center class="title">
+      {{title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-segment [ngModel]="currentIndex.toString()">
+    <ion-segment-button *ngFor="let node of nodes; let i = index" (ionSelect)=selectIndex(i) value="{{i}}">
+      {{node.region && node.region.name ? node.region.name : "请选择"}}
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-grid>
+    <ion-row *ngFor="let number of numbers[currentIndex]">
+      <ion-col width-33 text-center *ngFor="let item of getGroup(number)">
+        <button ion-button [outline]="!isHighlight(item.id)" (click)="itemSelected(item)" block small>{{item.name}} <ion-icon name="checkmark" *ngIf="isHighlight(item.id)"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

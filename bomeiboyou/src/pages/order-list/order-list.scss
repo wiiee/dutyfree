@@ -1,0 +1,17 @@
+page-order-list {
+    .quantity {
+        color: #8b008b;
+    }
+
+    .go {
+        color: color($colors, primary);
+    }
+
+    .empty {
+        color: color($colors, danger);
+    }
+
+    .scroll-content {
+        margin-bottom: 10px !important;
+    }    
+}

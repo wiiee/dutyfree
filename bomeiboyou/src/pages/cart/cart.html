@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>
+      <div *ngIf="context.isLogIn">购物车</div>
+      <div *ngIf="!context.isLogIn" class="auth">
+        <ion-segment [ngModel]="titleIndex.toString()">
+          <ion-segment-button *ngFor="let item of titles; let i = index" (ionSelect)=selectTitle(i) value="{{i}}">
+            {{item}}
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="!context.isLogIn" padding>
+    <div class="log-in" [hidden]="titleIndex !== 0">
+      <log-in></log-in>
+    </div>
+    <div class="sign-up" [hidden]="titleIndex !== 1">
+      <sign-up></sign-up>
+    </div>
+  </div>
+
+  <div *ngIf="context.isLogIn && isReady">
+    <ion-item no-lines *ngIf="items.length === 0">
+      你的购物车是空的
+    </ion-item>
+
+    <ion-grid>
+      <ion-row *ngFor="let item of items">
+        <ion-col width-10 center text-center>
+          <ion-checkbox [(ngModel)]="item.isSelected" (ionChange)="checkItem()"></ion-checkbox>
+        </ion-col>
+        <ion-col width-25 (click)="goDetailPage(item.productId)">
+          <img [src]="getImgUrl(item.logo)" [alt]="item.name" class="img-thumbnail">
+        </ion-col>
+        <ion-col (press)="removeCart(item.productId, 0)">
+          <ion-row>
+            <ion-col>{{item.name}}</ion-col>
+          </ion-row>
+          <ion-row center>
+            <ion-col width-25>{{item.price}}</ion-col>
+            <ion-col width-75 class="op" text-right>
+              <button ion-button small class="button-op" color="primary" (click)="removeCart(item.productId, 1)" [disabled]="item.quantity === 1">
+              <ion-icon name="remove"></ion-icon>
+            </button>
+              <input class="quantity" [(ngModel)]="item.quantity" (change)="updateCart()">
+              <button ion-button small class="button-op" color="primary" (click)="addCart(item.productId, 1)">
+              <ion-icon name="add"></ion-icon>
+            </button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<div [hidden]="!context.isLogIn || !isReady">
+  <ion-grid class="confirm" [style.bottom]="footerHeight + 'px'">
+    <ion-row>
+      <ion-col width-10 center text-center class="selectAll">
+        <ion-checkbox [(ngModel)]="isAllSelected" (ionChange)="selectAll()"></ion-checkbox>
+      </ion-col>
+      <ion-col width-50 center text-center>
+        合计:
+        <ion-icon name="logo-yen"></ion-icon>{{cartService.getTotalPriceSelected()}}
+      </ion-col>
+      <ion-col>
+        <button ion-button block color="danger" [disabled]="!isSelected()" (click)="confirmOrder()">去结算({{cartService.getNumberSelected()}})</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

@@ -1,0 +1,49 @@
+<!--
+  Generated template for the SignUp component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>手机号码</ion-label>
+      <ion-input type="text" formControlName="id"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="formErrors.id.length > 0" class="alert alert-danger">
+      <ul>
+        <li *ngFor="let error of formErrors.id">{{error}}</li>
+      </ul>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>密码</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="formErrors.password.length > 0" class="alert alert-danger">
+      <ul>
+        <li *ngFor="let error of formErrors.password">{{error}}</li>
+      </ul>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>确认密码</ion-label>
+      <ion-input type="password" formControlName="confirmPassword"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="formErrors.confirmPassword.length > 0" class="alert alert-danger">
+      <ul>
+        <li *ngFor="let error of formErrors.confirmPassword">{{error}}</li>
+      </ul>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="errorMsg" class="error" text-wrap no-lines>
+    {{errorMsg}}
+  </ion-item>
+
+  <button ion-button type="submit" block [disabled]="!form.valid" class="signUp">{{isProcessing ? "注册中..." : "注册"}}</button>
+</form>

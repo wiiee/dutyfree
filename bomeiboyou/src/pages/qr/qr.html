@@ -1,0 +1,28 @@
+<!--
+  Generated template for the Qr page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center class="title">我的二维码</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <img [src]="getQrUrl()" alt="我的二维码" class="qr-center">
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item no-lines>
+    <ul>
+      <li>你将获得朋友第一单购买金额的5%收入。</li>
+    </ul>
+  </ion-item>
+</ion-content>
